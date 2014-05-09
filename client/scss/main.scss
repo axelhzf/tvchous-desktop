@@ -1,0 +1,56 @@
+$black: #16171A;
+$blue: #314aff;
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background-color: $black;
+  color: #fff;
+  font-family: helvetica, arial, sans-serif;
+  font-size: 12px;
+}
+
+body {
+  margin: 0;
+}
+
+a {
+  cursor: pointer;
+
+  &:hover {
+    color: $blue;
+  }
+}
+
+.shows-container {
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.shows-menu {
+  float: left;
+  width: 250px;
+  height: 100%;
+  overflow-y: scroll;
+
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+.show-details {
+  float: left;
+  width: 100%;
+}
+
+.poster {
+  width: 100px;
+  height: auto;
+}

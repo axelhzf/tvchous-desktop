@@ -1,0 +1,33 @@
+.shows-container(ng-controller="AppController as app")
+  .shows-menu
+    .searchbox
+      input(type="text", ng-model="app.query")
+      ul
+        li(ng-repeat="show in app.trendingShows | filter: {title: app.query}")
+          a(ng-click="app.selectShow(show)") {{show.title}}
+
+  .show-details
+    div(ng-if="app.show")
+      img.poster(ng-src="{{app.show.poster}}")
+      h1 {{app.show.title}}
+
+      ul
+        li(ng-repeat="season in app.show.seasons")
+          a(ng-click="app.selectSeason(season)")
+            | Season {{season.season}}, Episodes {{season.episodes_count}}
+
+      ul
+        li(ng-repeat="episode in app.season.episodes")
+          a(ng-click="app.selectEpisode(episode)")
+            | Episode {{episode.episode}} - {{episode.title}} - {{episode.first_aired_date | date}}
+            span(ng-if="episode.isAired()")  Emitido
+
+      div(ng-if="app.episode")
+        h2 {{app.episode.title}}
+        div Season {{app.episode.season}} Episode {{app.episode.episode}}
+        p {{app.episode.overview}}
+        img(ng-src="{{app.episode.screen}}")
+
+      div(ng-if="app.episode.torrents")
+        ul
+          li(ng-repeat="torrent in app.episode.torrents") {{torrent.title}} {{torrent.seed}}/{{torrent.leechers}}
