@@ -27,7 +27,10 @@
               td.is-aired: i(class="fa fa-circle", ng-class="{aired: episode.isAired()}")
               td.title {{episode.id()}} - {{episode.title}}
               td.aired-date {{episode.first_aired_date | date}}
-              td.download
+              td.actions
+                span(ng-if="episode.file")
+                  a(ng-click="app.playEpisode(episode)")
+                    i(class="fa fa-play-circle")
                 a(ng-click="app.downloadEpisode(episode)")
                   i(class="fa fa-download")
 

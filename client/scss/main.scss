@@ -123,7 +123,12 @@ ul.inline {
     width: 130px;
   }
 
-  .download {
+  .actions {
     width: 60px;
+    text-align: right;
+
+    i {
+      margin-left: 10px;
+    }
   }
 }

@@ -7,4 +7,6 @@ angular.module("app").factory "Season", (Model) ->
       @episodes = undefined
       @season = _.string.lpad(@season, 2, "0")
 
+    id: ->
+      #{}
 

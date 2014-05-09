@@ -10,7 +10,9 @@
     "coffee-script": "^1.7.1",
     "request": "^2.34.0",
     "cacheman": "^1.0.2",
-    "pirateship": "git://github.com/axelhzf/pirateship.git#master"
+    "pirateship": "git://github.com/axelhzf/pirateship.git#master",
+    "async": "^0.8.0",
+    "glob": "^3.2.9"
   },
   "devDependencies": {
     "gulp-coffee": "^1.4.2",
