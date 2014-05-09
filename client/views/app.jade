@@ -1,33 +1,41 @@
-.shows-container(ng-controller="AppController as app")
-  .shows-menu
-    .searchbox
-      input(type="text", ng-model="app.query")
+.container(ng-controller="AppController as app")
+  .header
+    input(type="text", ng-model="app.query")
+
+  .shows-container
+    .shows-menu
       ul
         li(ng-repeat="show in app.trendingShows | filter: {title: app.query}")
           a(ng-click="app.selectShow(show)") {{show.title}}
 
-  .show-details
-    div(ng-if="app.show")
-      img.poster(ng-src="{{app.show.poster}}")
-      h1 {{app.show.title}}
+    .show-details
+      div(ng-if="app.show")
+        header
+          .poster
+            img(ng-src="{{app.show.poster}}")
+          .description
+            h1 {{app.show.title}}
+            div Seasons
+            ul.seasons.inline
+              li(ng-repeat="season in app.show.seasons")
+                a(ng-click="app.selectSeason(season)")
+                  | {{season.season}}
 
-      ul
-        li(ng-repeat="season in app.show.seasons")
-          a(ng-click="app.selectSeason(season)")
-            | Season {{season.season}}, Episodes {{season.episodes_count}}
+        table.episodes-table
+          tbody
+            tr(ng-repeat="episode in app.season.episodes")
+              td.is-aired: i(class="fa fa-circle", ng-class="{aired: episode.isAired()}")
+              td.title {{episode.id()}} - {{episode.title}}
+              td.aired-date {{episode.first_aired_date | date}}
+              td.download
+                a(ng-click="app.downloadEpisode(episode)")
+                  i(class="fa fa-download")
 
-      ul
-        li(ng-repeat="episode in app.season.episodes")
-          a(ng-click="app.selectEpisode(episode)")
-            | Episode {{episode.episode}} - {{episode.title}} - {{episode.first_aired_date | date}}
-            span(ng-if="episode.isAired()")  Emitido
+        div(ng-if="app.episode")
+          h2 {{episode.id()}} {{app.episode.title}}
+          p {{app.episode.overview}}
+          img(ng-src="{{app.episode.screen}}")
 
-      div(ng-if="app.episode")
-        h2 {{app.episode.title}}
-        div Season {{app.episode.season}} Episode {{app.episode.episode}}
-        p {{app.episode.overview}}
-        img(ng-src="{{app.episode.screen}}")
-
-      div(ng-if="app.episode.torrents")
-        ul
-          li(ng-repeat="torrent in app.episode.torrents") {{torrent.title}} {{torrent.seed}}/{{torrent.leechers}}
+        div(ng-if="app.episode.torrents")
+          ul
+            li(ng-repeat="torrent in app.episode.torrents") {{torrent.title}} {{torrent.seed}}/{{torrent.leechers}}

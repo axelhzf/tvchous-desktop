@@ -35,10 +35,13 @@ angular.module("app").controller "AppController",
         @season.episodes = episodes
 
     fetchTorrents: ->
-      season = _.string.lpad(@season.season, 2, "0")
-      episode = _.string.lpad(@episode.episode, 2, "0")
-      q = "#{@show.title} S#{season}E#{episode}"
+      q = "#{@show.title} #{@episode.id()}"
       console.log q
 
       @pirateshipProvider.find(q).then (torrents) =>
         @episode.torrents = torrents
+
+    downloadEpisode: (episode) ->
+      q = "#{@show.title} #{episode.id()}"
+      @pirateshipProvider.find(q).then (torrents) =>
+        @pirateshipProvider.download torrents[0].link

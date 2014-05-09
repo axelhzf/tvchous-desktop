@@ -1,5 +1,8 @@
-$black: #16171A;
-$blue: #314aff;
+$black: #121314;
+$grey: #1F2022;
+$green: #89D201;
+$border-color: #323438;
+$lightGrey: #898A8E;
 
 * {
   box-sizing: border-box;
@@ -7,9 +10,9 @@ $blue: #314aff;
 
 html {
   background-color: $black;
-  color: #fff;
   font-family: helvetica, arial, sans-serif;
-  font-size: 12px;
+  font-size: 14px;
+  color: $lightGrey;
 }
 
 body {
@@ -18,10 +21,23 @@ body {
 
 a {
   cursor: pointer;
+}
 
-  &:hover {
-    color: $blue;
-  }
+h1, h2, h3, h4, h5 {
+  font-weight: 100;
+}
+
+$header-height: 40px;
+
+.header {
+  z-index: 1;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: $header-height;
+  background-color: $grey;
+  border-bottom: 1px solid $border-color;
 }
 
 .shows-container {
@@ -30,27 +46,84 @@ a {
   position: absolute;
   width: 100%;
   height: 100%;
+  padding-top: $header-height;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  padding: 5px 2px;
 }
 
 .shows-menu {
-  float: left;
   width: 250px;
   height: 100%;
   overflow-y: scroll;
-
-  ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
+  background-color: $grey;
 }
 
 .show-details {
-  float: left;
-  width: 100%;
+  flex: 1;
+  height: 100%;
+  overflow-y: scroll;
 }
 
-.poster {
-  width: 100px;
-  height: auto;
+.show-details header {
+  padding: 20px;
+  display: flex;
+  flex-direction: row;
+
+  .poster img {
+    width: 100px;
+    height: auto;
+  }
+
+  .description {
+    flex: 1;
+    margin-left: 20px;
+
+    h1 {
+      color: #fff;
+
+    }
+  }
+}
+
+ul.inline {
+  li {
+    display: inline-block;
+  }
+}
+
+
+.aired {
+  color: $green;
+}
+
+
+.episodes-table {
+  width: 100%;
+  border-collapse: collapse;
+
+  td {
+    border-top: 1px solid $border-color;
+    border-bottom: 1px solid $border-color;
+    padding: 7px;
+  }
+
+  .is-aired {
+    width: 20px;
+  }
+
+  .aired-date {
+    width: 130px;
+  }
+
+  .download {
+    width: 60px;
+  }
 }

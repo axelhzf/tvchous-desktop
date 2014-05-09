@@ -5,5 +5,6 @@ angular.module("app").factory "Season", (Model) ->
 
       @episodes_count = @episodes
       @episodes = undefined
+      @season = _.string.lpad(@season, 2, "0")
 
 

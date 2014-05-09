@@ -8,7 +8,7 @@ app.use(express.static(path.join(__dirname, "../dist")))
 app.use(app.router)
 
 Cacheman = require "cacheman"
-cache = new Cacheman "api"
+cache = new Cacheman "api", ttl: "5h"
 
 # Proxy trakt api
 

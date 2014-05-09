@@ -1,4 +1,5 @@
 pirateship = require "pirateship"
+exec = require('child_process').exec
 
 class PirateShipProvider
   constructor: (@$q) ->
@@ -11,5 +12,14 @@ class PirateShipProvider
       else
         defer.resolve(results)
     defer.promise
+
+  download: (link) ->
+    console.log "download #{link}"
+    cmd = "open /Applications/uTorrent.app #{link}"
+    exec cmd
+
+
+
+
 
 angular.module("app").service "pirateshipProvider", PirateShipProvider
