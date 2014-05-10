@@ -37,13 +37,14 @@ angular.module("app").controller "AppController",
         @$scope.$apply =>
           @season.episodes = episodes
 
-        @fileSystemService.fillEpisodesFile episodes, (err) =>
+        console.log "fillEpisodes"
+        @fileSystemService.fillEpisodes episodes, (err) =>
           console.log "done fill"
           @$scope.$apply()
 
 
     downloadEpisode: (episode) ->
-      q = "#{@show.title} #{episode.id()}"
+      q = "#{episode._show.id} #{episode.id}"
       @pirateshipProvider.find q,(err, torrents) =>
         @execService.downloadTorrent torrents[0].link
 

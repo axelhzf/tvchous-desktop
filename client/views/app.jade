@@ -25,17 +25,19 @@
           tbody
             tr(ng-repeat="episode in app.season.episodes")
               td.is-aired: i(class="fa fa-circle", ng-class="{aired: episode.isAired()}")
-              td.title {{episode.id()}} - {{episode.title}}
-              td.aired-date {{episode.first_aired_date | date}}
+              td.title {{episode.id}} - {{episode.title}}
               td.actions
+                span(ng-repeat="subtitle in episode.subtitles", class="flag-icon flag-icon-{{subtitle.country}}", title="{{subtitle.file}}")
                 span(ng-if="episode.file")
-                  a(ng-click="app.playEpisode(episode)")
+                  a(ng-click="app.playEpisode(episode)", title="episode.file")
                     i(class="fa fa-play-circle")
-                a(ng-click="app.downloadEpisode(episode)")
-                  i(class="fa fa-download")
+                span
+                  a(ng-click="app.downloadEpisode(episode)")
+                    i(class="fa fa-download")
+              td.aired-date {{episode.first_aired_date | date}}
 
         div(ng-if="app.episode")
-          h2 {{episode.id()}} {{app.episode.title}}
+          h2 {{episode.id}} {{app.episode.title}}
           p {{app.episode.overview}}
           img(ng-src="{{app.episode.screen}}")
 
