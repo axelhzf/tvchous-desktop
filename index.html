@@ -9,25 +9,36 @@
 </head>
 <body>
 
-  <div ng-app="app">
-    <ng-include src="'dist/views/app.html'"></ng-include>
+<div ng-app="app">
+  <div class="container">
+    <div class="header">
+      <ng-include src="'dist/views/header.html'" ng-controller="HeaderController as header"></ng-include>
+    </div>
+    <div class="content" ui-view></div>
   </div>
+</div>
 
-  <script src="dist/components/jquery/dist/jquery.js"></script>
-  <script src="dist/components/angular/angular.js"></script>
-  <script src="dist/components/underscore/underscore.js"></script>
-  <script src="dist/components/underscore.string/dist/underscore.string.min.js"></script>
+<script src="dist/components/jquery/dist/jquery.js"></script>
+<script src="dist/components/angular/angular.js"></script>
+<script src="dist/components/underscore/underscore.js"></script>
+<script src="dist/components/underscore.string/dist/underscore.string.min.js"></script>
+<script src="dist/components/angular-ui-router/release/angular-ui-router.js"></script>
 
-  <script src="dist/js/app.js"></script>
-  <script src="dist/js/model/Episode.js"></script>
-  <script src="dist/js/model/Model.js"></script>
-  <script src="dist/js/model/Season.js"></script>
-  <script src="dist/js/model/Show.js"></script>
-  <script src="dist/js/service/traktService.js"></script>
-  <script src="dist/js/service/pirateshipService.js"></script>
-  <script src="dist/js/service/fileSystemService.js"></script>
-  <script src="dist/js/service/execService.js"></script>
-  <script src="dist/js/AppController.js"></script>
+<script src="client/js/app.js"></script>
+<script src="client/js/router.js"></script>
+
+<script src="client/js/model/Show.js"></script>
+<script src="client/js/model/Season.js"></script>
+<script src="client/js/model/Episode.js"></script>
+<script src="client/js/service/traktService.js"></script>
+<script src="client/js/service/pirateshipService.js"></script>
+<script src="client/js/service/fileSystemService.js"></script>
+<script src="client/js/service/execService.js"></script>
+<script src="client/js/controller/HomeController.js"></script>
+<script src="client/js/controller/HeaderController.js"></script>
+<script src="client/js/controller/ShowController.js"></script>
+<script src="client/js/controller/SeasonController.js"></script>
+<script src="client/js/controller/EpisodeController.js"></script>
 
 </body>
 </html>

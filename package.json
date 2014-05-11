@@ -1,6 +1,7 @@
 {
   "name": "tvchous",
   "main": "index.html",
+  "js-flags": "--harmony",
   "window": {
     "toolbar": true,
     "width": 800,
@@ -12,7 +13,12 @@
     "cacheman": "^1.0.2",
     "pirateship": "git://github.com/axelhzf/pirateship.git#master",
     "async": "^0.8.0",
-    "glob": "^3.2.9"
+    "glob": "^3.2.9",
+    "co": "^3.0.6",
+    "thunkify": "^2.1.1",
+    "cogent": "^0.4.3",
+    "co-parallel": "^1.0.0",
+    "co-exec": "^1.1.0"
   },
   "devDependencies": {
     "gulp-coffee": "^1.4.2",

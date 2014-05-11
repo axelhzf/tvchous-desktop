@@ -1,0 +1,11 @@
+h2 {{episode.fullId}} {{episode.title}}
+p {{episode.overview}}
+img(ng-src="{{episode.screen}}")
+
+
+table.torrents(ng-if="episode.torrents")
+  tbody
+    tr(ng-repeat="torrent in episode.torrents")
+      td
+        a(ng-click="downloadTorrent(torrent)") {{torrent.title}}
+      td.status {{torrent.seeds}}/{{torrent.leechers}}

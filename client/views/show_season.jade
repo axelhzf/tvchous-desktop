@@ -1,0 +1,19 @@
+table.episodes-table
+  tbody
+    tr(ng-repeat="episode in season.episodes")
+      td.is-aired: i(class="fa fa-circle", ng-class="{aired: episode.isAired()}")
+      td.title
+        a(ui-sref="show.episode({showId: episode._show.id, seasonId: episode._season.id, episodeId: episode.id})")
+          | {{episode.fullId}} - {{episode.title}}
+      td.actions
+        span(ng-repeat="subtitle in episode.local.subtitles",
+          class="flag-icon flag-icon-{{subtitle.country}}",
+          title="{{subtitle.file}}")
+
+        span(ng-if="episode.local.file")
+          a(ng-click="playEpisode(episode)", title="{{episode.local.file}}")
+            i(class="fa fa-play-circle")
+        span
+          a(ng-click="downloadEpisode(episode)")
+            i(class="fa fa-download")
+      td.aired-date {{episode.first_aired_date | date}}

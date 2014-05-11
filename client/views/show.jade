@@ -1,0 +1,13 @@
+.show-details
+    header
+      .poster
+        img(ng-src="{{show.poster}}")
+      .description
+        h1 {{show.title}}
+        div Seasons
+        ul.seasons.inline
+          li(ng-repeat="season in show.seasons")
+            a(ui-sref="show.season({showId: show.id, seasonId: season.id})")
+              | {{season.season}}
+
+    .season(ui-view="")
