@@ -1,4 +1,4 @@
-.show-details
+.show
     header
       .poster
         img(ng-src="{{show.poster}}")
@@ -10,4 +10,4 @@
             a(ui-sref="show.season({showId: show.id, seasonId: season.id})")
               | {{season.season}}
 
-    .season(ui-view="")
+    .show-content(ui-view="")

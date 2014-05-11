@@ -1,4 +1,6 @@
-h1 FAVORITES
-ul
-  li(ng-repeat="show in shows")
-    a(ui-sref="show({showId: show.id })") {{show.title}}
+.favorites
+  h1 FAVORITES
+
+  .poster-list
+    a.poster-list-item(ng-repeat="show in shows | filter: query | limitTo: 10", ui-sref="show({showId: show.id })")
+      img(ng-src="{{show.poster}}")

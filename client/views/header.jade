@@ -1,4 +1,10 @@
 .header(ng-controller="HeaderController")
-  a(ui-sref="home") Home
-  input(type="text", ng-model="query")
+  a(ui-sref="home")
+    i(class="fa fa-home")
+  a
+    i(class="fa fa-chevron-left")
+  a
+    i(class="fa fa-chevron-right")
+
+  input(type="text", ng-model="query", placeholder="Search...", ng-change="changeQuery(query)")
 

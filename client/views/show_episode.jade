@@ -1,6 +1,7 @@
-h2 {{episode.fullId}} {{episode.title}}
-p {{episode.overview}}
-img(ng-src="{{episode.screen}}")
+.show-episode-details
+  h2 {{episode.fullId}} {{episode.title}}
+  p {{episode.overview}}
+  img(ng-src="{{episode.screen}}")
 
 
 table.torrents(ng-if="episode.torrents")

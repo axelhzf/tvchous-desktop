@@ -9,6 +9,12 @@ module.config(function ($stateProvider, $urlRouterProvider) {
     controller: "HomeController"
   });
 
+  $stateProvider.state("search", {
+    url: "/search/:query",
+    templateUrl: "dist/views/home.html",
+    controller: "HomeController"
+  });
+
   $stateProvider.state("show", {
     url: "/shows/:showId",
     templateUrl: "dist/views/show.html",

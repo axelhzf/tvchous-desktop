@@ -1,6 +1,7 @@
-angular.module("app").controller("HomeController", function ($scope, traktService) {
+angular.module("app").controller("HomeController", function ($scope, $stateParams, traktService) {
 
   function init () {
+    $scope.query = $stateParams.query;
     findShows();
   }
 

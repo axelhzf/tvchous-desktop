@@ -19,7 +19,7 @@ angular.module("app").controller("ShowController",
       if ($state.$current.name === "show") {
         var showId = $scope.show.id;
         var seasonId = $scope.show.seasons[0].id;
-        $state.go("show.season", {showId: showId, seasonId: seasonId});
+        $state.go("show.season", {showId: showId, seasonId: seasonId}, {location : "replace"});
       }
     }
 
