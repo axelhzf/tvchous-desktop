@@ -1,6 +1,7 @@
 .favorites
   h1 FAVORITES
 
-  .poster-list
-    a.poster-list-item(ng-repeat="show in shows | filter: query | limitTo: 10", ui-sref="show({showId: show.id })")
+  spinner(wait-for="shows")
+  .poster-list(ng-if="shows")
+    a.poster-list-item(ng-repeat="show in shows | filter: {title: query} | limitTo: 10", ui-sref="show({showId: show.id })")
       img(ng-src="{{show.poster}}")

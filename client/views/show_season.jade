@@ -1,4 +1,5 @@
-table.episodes-table
+spinner(wait-for="season")
+table.episodes-table(ng-if="season")
   tbody
     tr(ng-repeat="episode in season.episodes")
       td.is-aired: i(class="fa fa-circle", ng-class="{aired: episode.isAired()}")

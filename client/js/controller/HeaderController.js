@@ -11,7 +11,8 @@ angular.module("app").controller("HeaderController", function ($scope, $state, $
   }
 
   function changeQuery (query) {
-    $state.go("search", {query: query});
+    var location = $state.current.name === "search" ? "replace" : true;
+    $state.go("search", {query: query}, {location: location});
   }
 
   _.extend($scope, {
