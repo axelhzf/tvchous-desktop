@@ -8,7 +8,11 @@ angular.module("app").factory("postProcessService", function (configurationServi
     var basePath = configurationService.getConfiguration().downloadedFolder;
     var destPath = configurationService.getConfiguration().tvshowsFolder;
     console.log("start", basePath, destPath);
-    watcher = downloadPostProcess.watcher(basePath, destPath);
+    try {
+      watcher = downloadPostProcess.watcher(basePath, destPath);
+    } catch(e) {
+      console.log("postProcess service error", e);
+    }
   }
 
   function stop () {
