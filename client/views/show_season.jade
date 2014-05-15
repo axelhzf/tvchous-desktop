@@ -16,4 +16,5 @@ table.episodes-table(ng-if="season")
         span(ng-if="!episode.local.file && episode.isAired()")
           a(ng-click="downloadEpisode(episode)")
             i(class="fa fa-download")
-      td.aired-date {{episode.first_aired_date | date}}
+      td.aired-date
+        span(title="{{episode.first_aired_date | date }}") {{episode.first_aired_date | relativeDate }}

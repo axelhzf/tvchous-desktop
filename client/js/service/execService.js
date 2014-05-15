@@ -7,7 +7,7 @@ angular.module("app").factory("execService", function () {
   }
 
   function* playFile (file) {
-    return yield exec("open /Applications/VLC.app " + file);
+    return yield exec("open " + file);
   }
 
   return {

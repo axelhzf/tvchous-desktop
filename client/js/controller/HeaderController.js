@@ -16,7 +16,7 @@ angular.module("app").controller("HeaderController", function ($scope, $state, $
   }
 
   _.extend($scope, {
-    changeQuery: _.debounce(changeQuery, 500)
+    changeQuery: changeQuery
   });
   init();
 });
