@@ -23,7 +23,7 @@
     "co-defer": "^0.1.0",
     "co-each": "^0.1.0",
     "subtitles-downloader": "^0.1.0",
-    "underscore.string": "^2.3.3"
+    "underscore.string": "^2.3.3",
     "download-post-process": "git://github.com/axelhzf/download-post-process.git"
   },
   "devDependencies": {
