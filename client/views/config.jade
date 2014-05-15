@@ -1,1 +1,14 @@
 h1 Configuration
+
+form
+  .form-group
+    label Downloaded folder
+      small  (absolute path)
+    input.form-control(ng-model="configuration.downloadedFolder")
+
+  .form-group
+    label TvShows folder
+      small  (absolute path)
+    input.form-control(ng-model="configuration.tvshowsFolder")
+
+  button.btn.btn-primary(type="submit", ng-click="save()") Save

@@ -1,18 +1,33 @@
 var downloadPostProcess = require("download-post-process");
 
-angular.module("app").factory("postProcessService", function () {
+angular.module("app").factory("postProcessService", function (configurationService) {
 
-  console.log("post process service start");
+  var watcher;
 
-  var basepath = "/Users/axelhzf/Downloads/utorrent/downloaded";
-  var destpath = "/Users/axelhzf/Downloads/utorrent/tvshows";
-
-  function start() {
-    downloadPostProcess.watcher(basepath, destpath);
+  function start () {
+    var basePath = configurationService.getConfiguration().downloadedFolder;
+    var destPath = configurationService.getConfiguration().tvshowsFolder;
+    console.log("start", basePath, destPath);
+    watcher = downloadPostProcess.watcher(basePath, destPath);
   }
 
+  function stop () {
+    console.log("stop");
+    if (watcher) {
+      watcher.stop();
+      watcher = undefined;
+    }
+  }
+
+  function configurationChange () {
+    stop();
+    start();
+  }
+
+  configurationService.events.on("change", configurationChange);
+
   return {
-    start : start,
-    stop : stop
+    start: start,
+    stop: stop
   }
 });

@@ -4,10 +4,7 @@ var glob = thunkify(require("glob"));
 var each = require("co-each");
 var parallel = require("co-parallel");
 
-var BASE_PATH = "/Users/axelhzf/Downloads/utorrent/tvshows";
-
-
-angular.module("app").factory("fileSystemService", function () {
+angular.module("app").factory("fileSystemService", function (configurationService) {
 
   function* updateEpisodes (episodes) {
     yield parallel(episodes.map(episodeLocalInfo), 5);
@@ -20,16 +17,20 @@ angular.module("app").factory("fileSystemService", function () {
   }
 
   function* episodeLocalFile (episode) {
-    var fileGlob = path.join(BASE_PATH, episode._show.id, "*" + episode.fullId + "*.+(mkv|avi|mp4)");
+    var fileGlob = path.join(basePath(), episode._show.id, "*" + episode.fullId + "*.+(mkv|avi|mp4)");
     var files = yield glob(fileGlob);
     return files[0];
   }
 
   function* episodeLocalSubtitles (episode) {
-    var fileGlob = path.join(BASE_PATH, episode._show.id, "*" + episode.fullId + "*.+(srt)");
+    var fileGlob = path.join(basePath(), episode._show.id, "*" + episode.fullId + "*.+(srt)");
     var files = yield glob(fileGlob);
     var subtitles = _.map(files, subtitleInfoFromFile);
     return subtitles;
+  }
+
+  function basePath () {
+    return configurationService.getConfiguration().tvshowsFolder;
   }
 
   function subtitleInfoFromFile (file) {
