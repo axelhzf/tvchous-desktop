@@ -49,7 +49,7 @@ angular.module("app").factory("fileSystemService", function () {
 
   function countryFromLanguage (lang) {
     if (lang === "spa") return "es";
-    if (lang === "eng") return "us";
+    if (lang === "eng") return "en";
     return lang;
   }
 

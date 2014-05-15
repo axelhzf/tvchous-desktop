@@ -21,7 +21,8 @@
     "co-exec": "^1.1.0",
     "utorrent-api": "^0.1.3",
     "co-defer": "^0.1.0",
-    "co-each": "^0.1.0"
+    "co-each": "^0.1.0",
+    "subtitles-downloader": "^0.1.0"
   },
   "devDependencies": {
     "gulp": "^3.6.2",

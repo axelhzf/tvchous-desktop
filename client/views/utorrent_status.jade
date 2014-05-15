@@ -1,2 +1,2 @@
-.utorrent-status
-  .utorrent-status-progress(ng-style="{width: episode.utorrent.percentProgress/10 }") {{episode.utorrent.percentProgress / 10 | number:0}}
+.utorrent-status(ng-if="episode.utorrent")
+  .utorrent-status-progress(ng-style="{width: episode.utorrent.percentProgress/10 }") {{episode.utorrent.percentProgress / 10 | number:0}}%

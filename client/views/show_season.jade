@@ -9,14 +9,11 @@ table.episodes-table(ng-if="season")
       td.utorrent
         utorrent-status(episode="episode")
       td.actions
-        span(ng-repeat="subtitle in episode.local.subtitles",
-          class="flag-icon flag-icon-{{subtitle.country}}",
-          title="{{subtitle.file}}")
-
+        subtitles-status(episode="episode")
         span(ng-if="episode.local.file")
           a(ng-click="playEpisode(episode)", title="{{episode.local.file}}")
             i(class="fa fa-play-circle")
-        span
+        span(ng-if="!episode.local.file && episode.isAired()")
           a(ng-click="downloadEpisode(episode)")
             i(class="fa fa-download")
       td.aired-date {{episode.first_aired_date | date}}

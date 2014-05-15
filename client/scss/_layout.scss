@@ -17,6 +17,9 @@ a {
   cursor: pointer;
   //color: $lightGrey;
   text-decoration: none;
+  &:hover {
+    text-decoration: none;
+  }
 }
 
 h1, h2, h3, h4, h5 {
@@ -157,8 +160,12 @@ table {
     width: 130px;
   }
 
+  .utorrent {
+    width: 100px;
+  }
+
   .actions {
-    width: 120px;
+    width: 70px;
     text-align: right;
 
     span {
@@ -192,3 +199,18 @@ table {
 
 }
 
+.subtitles-status {
+  font-variant: small-caps;
+}
+
+.subtitles-status-none {
+  color: $lightGrey;
+}
+
+.subtitles-status-some {
+  color: orange;
+}
+
+.subtitles-status-all {
+  color: $green;
+}
