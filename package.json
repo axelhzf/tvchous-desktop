@@ -30,7 +30,8 @@
     "express": "^4.2.0",
     "socket.io": "^0.9.16",
     "socket.io-client": "^0.9.16",
-    "dnode": "^1.2.0"
+    "dnode": "^1.2.0",
+    "underscore": "~1.6.0"
   },
   "devDependencies": {
     "gulp": "^3.6.2",
