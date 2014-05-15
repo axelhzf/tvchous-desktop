@@ -6,7 +6,7 @@ var autoprefixer = require("gulp-autoprefixer");
 
 var path = {
   client: {
-    sass: "client/scss/*.scss",
+    sass: "client/scss/**/*.scss",
     views: "client/views/**/*.jade"
   },
   dist: {

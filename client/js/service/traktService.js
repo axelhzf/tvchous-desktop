@@ -6,7 +6,7 @@ var co = require("co");
 var parallel = require("co-parallel");
 var request = require("cogent");
 
-angular.module("app").service("traktService", function (Show, Season, Episode, fileSystemService) {
+angular.module("app").service("traktService", function (Show, Season, Episode) {
 
   var shows;
 
@@ -38,10 +38,6 @@ angular.module("app").service("traktService", function (Show, Season, Episode, f
       var url = TRAKT_BASE + "/show/season.json/" + TRAKT_API_KEY + "/" + show.imdb_id + "/" + season.season;
       var extraAttrs = {_season: season, _show: show};
       season.episodes = yield apiRequest(url, Episode, extraAttrs);
-
-      //fill local info
-      var fns = season.episodes.map(fileSystemService.episodeLocalInfo);
-      yield parallel(fns, 5);
     }
     return season;
   }

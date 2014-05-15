@@ -1,11 +1,13 @@
 spinner(wait-for="season")
 table.episodes-table(ng-if="season")
   tbody
-    tr(ng-repeat="episode in season.episodes")
+    tr(ng-repeat="episode in season.episodes", update-episode="episode")
       td.is-aired: i(class="fa fa-circle", ng-class="{aired: episode.isAired()}")
       td.title
         a(ui-sref="show.episode({showId: episode._show.id, seasonId: episode._season.id, episodeId: episode.id})")
           | {{episode.fullId}} - {{episode.title}}
+      td.utorrent
+        utorrent-status(episode="episode")
       td.actions
         span(ng-repeat="subtitle in episode.local.subtitles",
           class="flag-icon flag-icon-{{subtitle.country}}",

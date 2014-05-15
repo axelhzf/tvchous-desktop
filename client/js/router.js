@@ -31,6 +31,12 @@ module.config(function ($stateProvider, $urlRouterProvider) {
     url: "/seasons/:seasonId/episodes/:episodeId",
     templateUrl: "dist/views/show_episode.html",
     controller: "EpisodeController"
-  })
+  });
+
+  $stateProvider.state("config", {
+    url: "/config",
+    templateUrl: "dist/views/config.html",
+    controller: "ConfigController"
+  });
 
 });

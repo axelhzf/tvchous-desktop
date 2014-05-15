@@ -1,11 +1,17 @@
 var path = require("path");
 var thunkify = require("thunkify");
 var glob = thunkify(require("glob"));
+var each = require("co-each");
+var parallel = require("co-parallel");
 
-BASE_PATH = "/Users/axelhzf/dev/js/tvchous/download_test";
+var BASE_PATH = "/Users/axelhzf/Downloads/utorrent/tvshows";
 
 
 angular.module("app").factory("fileSystemService", function () {
+
+  function* updateEpisodes (episodes) {
+    yield parallel(episodes.map(episodeLocalInfo), 5);
+  }
 
   function* episodeLocalInfo (episode) {
     episode.local = {};
@@ -48,6 +54,7 @@ angular.module("app").factory("fileSystemService", function () {
   }
 
   return {
+    updateEpisodes: updateEpisodes,
     episodeLocalInfo: episodeLocalInfo
   }
 });

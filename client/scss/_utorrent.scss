@@ -1,0 +1,16 @@
+$utorrent-radius: 10px;
+
+.utorrent-status {
+  background-color: $lightGrey;
+  width: 100px;
+  border-radius: $utorrent-radius;
+  overflow: hidden;
+}
+
+.utorrent-status-progress {
+  background-color: $green;
+  color: #fff;
+  text-align: right;
+  border-radius: $utorrent-radius;
+  padding-right: 5px;
+}
