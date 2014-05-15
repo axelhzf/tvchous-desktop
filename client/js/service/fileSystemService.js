@@ -17,13 +17,13 @@ angular.module("app").factory("fileSystemService", function (configurationServic
   }
 
   function* episodeLocalFile (episode) {
-    var fileGlob = path.join(basePath(), "*.+(mkv|avi|mp4)");
+    var fileGlob = path.join(basePath(), episode._show.id, "*.+(mkv|avi|mp4)");
     var files = yield glob(fileGlob);
     return _.find(files, _.bind(episode.match, episode));
   }
 
   function* episodeLocalSubtitles (episode) {
-    var fileGlob = path.join(basePath(), "*.+(srt)");
+    var fileGlob = path.join(basePath(), episode._show.id, "*.+(srt)");
     var files = yield glob(fileGlob);
     files = _.filter(files, _.bind(episode.match, episode));
     var subtitles = _.map(files, subtitleInfoFromFile);
