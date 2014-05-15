@@ -19,12 +19,11 @@ Episode.prototype.match = function (title) {
 };
 
 function normalizeTitle(title) {
-  var episodeMatch = title.match(/(.*\.S\d\dE\d\d)/i);
+  var episodeMatch = title.match(/([^/]*\.S\d\dE\d\d)/i);
   if (!episodeMatch) return;
   var tmp = episodeMatch[1];
   tmp = tmp.toLowerCase();
   tmp = tmp.replace(/[.' ]/g, "");
-  console.log(tmp);
   return tmp;
 }
 

@@ -17,6 +17,11 @@ describe("Episode", function () {
       expect(episode.match("Game.of.Thrones.S01E01.lol.mvk")).to.be.true;
     });
 
+    it("should remove full path", function () {
+      var episode = createEpisode("/User/axelhzf/dev/download/game.of.thrones", 1, 1);
+      expect(episode.match("Game.of.Thrones.S01E01.lol.mvk")).to.be.true;
+    });
+
   });
 });
 
