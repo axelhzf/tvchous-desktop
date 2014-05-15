@@ -45,7 +45,7 @@ angular.module("app").factory("fileSystemService", function (configurationServic
 
   function subtitleLanguage (file) {
     var matches = file.match(/\.(\w{2,3})\.srt/);
-    var lang = matches.length > 0 ? matches[1] : undefined;
+    var lang = matches ? matches[1] : undefined;
     return lang;
   }
 
