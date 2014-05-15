@@ -3,6 +3,7 @@ var sass = require("gulp-sass");
 var jade = require("gulp-jade");
 var gutil = require("gulp-util");
 var autoprefixer = require("gulp-autoprefixer");
+var mocha = require("gulp-mocha");
 
 var path = {
   client: {
@@ -33,4 +34,11 @@ gulp.task("views", function () {
 gulp.task("watch", ["sass", "views"], function () {
   gulp.watch(path.client.sass, ["sass"]);
   gulp.watch(path.client.views, ["views"]);
+});
+
+gulp.task("test", function () {
+  gulp.src([
+    "client/js/model/Episode.js",
+    "test/model/Episode.spec.js"
+  ]).pipe(mocha())
 });

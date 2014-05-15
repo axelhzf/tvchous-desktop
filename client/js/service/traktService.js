@@ -6,7 +6,11 @@ var co = require("co");
 var parallel = require("co-parallel");
 var request = require("cogent");
 
-angular.module("app").service("traktService", function (Show, Season, Episode) {
+var Show = require("./client/js/model/Show");
+var Season = require("./client/js/model/Season");
+var Episode = require("./client/js/model/Episode");
+
+angular.module("app").service("traktService", function () {
 
   var shows;
 
