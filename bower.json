@@ -7,6 +7,7 @@
     "Font-Awesome": "~4.0.3",
     "flag-icon-css": "~0.6.1",
     "angular-ui-router": "~0.2.10",
-    "bootstrap-sass": "~3.0.2"
+    "bootstrap-sass": "~3.0.2",
+    "underscore.string": "~2.3.3"
   }
 }
