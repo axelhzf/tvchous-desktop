@@ -19,7 +19,7 @@ angular.module("app").factory("fileSystemService", function (configurationServic
   function* episodeLocalFile (episode) {
     var fileGlob = path.join(basePath(), episode._show.id, "*.+(mkv|avi|mp4)");
     var files = yield glob(fileGlob);
-    return _.find(files, _.bind(episode.match, episode));
+    return _.find(files, episode.match.bind(episode));
   }
 
   function* episodeLocalSubtitles (episode) {

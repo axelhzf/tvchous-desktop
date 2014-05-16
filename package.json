@@ -24,7 +24,9 @@
     "co-each": "^0.1.0",
     "subtitles-downloader": "^0.1.0",
     "underscore.string": "^2.3.3",
-    "download-post-process": "git://github.com/axelhzf/download-post-process.git"
+    "download-post-process": "git://github.com/axelhzf/download-post-process.git",
+    "cacheman-file": "0.0.8",
+    "MD5": "^1.2.1"
   },
   "devDependencies": {
     "gulp": "^3.6.2",

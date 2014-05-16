@@ -15,7 +15,7 @@ angular.module("app").directive("subtitlesStatus", function (subtitlesService) {
             try {
               yield subtitlesService.downloadSubtitle(scope.episode.local.file, langs[i]);
             } catch (e) {
-              console.err(e);
+              console.error(e);
             }
           }
         })();
