@@ -22,6 +22,11 @@ describe("Episode", function () {
       expect(episode.match("Game.of.Thrones.S01E01.lol.mvk")).to.be.true;
     });
 
+    it("should remove dots", function () {
+      var episode = createEpisode("/User/axelhzf/dev/download/Marvel.Agents.of.SHIELD", 1, 1);
+      expect(episode.match("Marvel.Agents.of.S.H.I.E.L.D.S01E01.lol.mvk")).to.be.true;
+    });
+
   });
 });
 
