@@ -2,7 +2,7 @@ var io = require('socket.io-client');
 var server = require("./server/server");
 var app = angular.module("app", ["ui.router"]);
 var dnode = require('dnode');
-var client = require("./client/js/service/client");
+var remote = require("./client/js/service/remote");
 
 app.run(function (episodeUpdaterService, fileSystemService, utorrentService, postProcessService) {
 
@@ -11,7 +11,8 @@ app.run(function (episodeUpdaterService, fileSystemService, utorrentService, pos
 
   postProcessService.start();
 
-  server.start();
-  client.start();
-
+  if(!process.env.SERVER_HOST) {
+    server.start();
+  }
+  remote.start();
 });

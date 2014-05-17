@@ -2,7 +2,7 @@ var dnode = require('dnode');
 var thunkify = require("thunkify");
 var remote;
 
-var client = Proxy.create({
+var remote = Proxy.create({
   get: function (receiver, index) {
     if(index === "start") return connect;
     if (!remote){
@@ -19,9 +19,11 @@ var client = Proxy.create({
 });
 
 function connect () {
-  var d = dnode.connect(5004, function (_remote) {
+  var host = process.env.SERVER_HOST;
+  var port = process.env.SERVER_PORT;
+  var d = dnode.connect({host: host, port: port}, function (_remote) {
     remote = _remote;
   });
 }
 
-module.exports = client;
+module.exports = remote;

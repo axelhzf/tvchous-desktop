@@ -17,6 +17,9 @@ utorrent.setCredentials(UTORRENT_USER, UTORRENT_PASSWORD);
 var utorrentCall = thunkify(utorrent.call.bind(utorrent));
 
 var server = dnode({
+  basePath: function () {
+    return PATH_SHOWS;
+  },
   filesFromBasePath: function (filesGlob, cb) {
     co(function *() {
       var files = yield glob(path.join(PATH_SHOWS, filesGlob));

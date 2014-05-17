@@ -2,7 +2,7 @@ var path = require("path");
 var thunkify = require("thunkify");
 var each = require("co-each");
 var parallel = require("co-parallel");
-var client = require("./client/js/service/client");
+var remote = require("./client/js/service/remote");
 
 angular.module("app").factory("fileSystemService", function (configurationService) {
 
@@ -13,18 +13,26 @@ angular.module("app").factory("fileSystemService", function (configurationServic
   function* episodeLocalInfo (episode) {
     episode.local = {};
     episode.local.file = yield episodeLocalFile(episode);
+    episode.local.mountFile = yield mountFile(episode.local.file);
     episode.local.subtitles = yield episodeLocalSubtitles(episode);
   }
 
   function* episodeLocalFile (episode) {
     var fileGlob = path.join(episode._show.id, "*.+(mkv|avi|mp4)");
-    var files = yield client.filesFromBasePath(fileGlob);
+    var files = yield remote.filesFromBasePath(fileGlob);
     return _.find(files, episode.match.bind(episode));
+  }
+
+  function *mountFile(file) {
+    if (process.env.SERVER_MOUNT) {
+      var basePath = yield remote.basePath();
+      return path.join(process.env.SERVER_MOUNT, file.substring(basePath.length));
+    }
   }
 
   function* episodeLocalSubtitles (episode) {
     var fileGlob = path.join(episode._show.id, "*.+(srt)");
-    var files = yield client.filesFromBasePath(fileGlob);
+    var files = yield remote.filesFromBasePath(fileGlob);
     files = _.filter(files, _.bind(episode.match, episode));
     var subtitles = _.map(files, subtitleInfoFromFile);
     return subtitles;

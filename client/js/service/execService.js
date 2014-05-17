@@ -1,10 +1,10 @@
 var exec = require("co-exec");
-var client = require("./client/js/service/client");
+var remote = require("./client/js/service/remote");
 
 angular.module("app").factory("execService", function () {
 
   function* downloadTorrent (link) {
-    return yield client.downloadTorrent(link);
+    return yield remote.downloadTorrent(link);
   }
 
   function* playFile (file) {

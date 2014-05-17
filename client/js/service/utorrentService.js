@@ -2,13 +2,13 @@ var thunkify = require("thunkify");
 var co = require("co");
 var defer = require("co-defer");
 
-var client = require("./client/js/service/client");
+var remote = require("./client/js/service/remote");
 
 
 angular.module("app").factory("utorrentService", function () {
 
   function* list () {
-    var response = yield client.torrentList();
+    var response = yield remote.torrentList();
     var torrents = _.map(response.torrents, parseTorrent);
     return torrents;
   }

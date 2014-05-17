@@ -16,7 +16,9 @@ angular.module("app").controller("SeasonController",
 
     function playEpisode (episode) {
       co(function *() {
-        yield execService.playFile(episode.local.file);
+        var file = episode.local.mountFile || episode.local.file;
+        console.log("play file", file);
+        yield execService.playFile(file);
       })();
     }
 

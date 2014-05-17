@@ -36,7 +36,11 @@ angular.module("app").factory("episodeUpdaterService", function ($rootScope) {
     for(var i= 0; i < tasks.length; i++) {
       yield tasks[i](watchedEpisodes);
     }
-    $rootScope.$apply();
+
+    if (!$rootScope.$$phase) {
+      $rootScope.$apply();
+    }
+
   }
 
   return {
