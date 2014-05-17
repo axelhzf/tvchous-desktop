@@ -17,6 +17,8 @@ var utorrent = new Utorrent('localhost', UTORRENT_PORT);
 utorrent.setCredentials(UTORRENT_USER, UTORRENT_PASSWORD);
 var utorrentCall = thunkify(utorrent.call.bind(utorrent));
 
+var downloadSubtitle = thunkify(subtitlesDownloader.downloadSubtitle);
+
 var server = dnode({
   basePath: function (cb) {
     return cb(null, PATH_SHOWS);
