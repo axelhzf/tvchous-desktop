@@ -38,7 +38,7 @@ angular.module("app").factory("episodeUpdaterService", function ($rootScope) {
     }
 
     if (!$rootScope.$$phase) {
-      $rootScope.$apply();
+     $rootScope.$apply();
     }
 
   }
