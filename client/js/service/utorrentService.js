@@ -1,20 +1,14 @@
 var thunkify = require("thunkify");
 var co = require("co");
 var defer = require("co-defer");
-var Client = require('utorrent-api');
-var Timer = require("./client/js/service/timer");
 
-var utorrent = new Client('localhost', '40959');
-var user = process.env.UTORRENT_USER;
-var password = process.env.UTORRENT_PASSWORD;
-utorrent.setCredentials(user, password);
+var client = require("./client/js/service/client");
 
-var utorrentCall = thunkify(_.bind(utorrent.call, utorrent));
 
 angular.module("app").factory("utorrentService", function () {
 
   function* list () {
-    var response = yield utorrentCall("list");
+    var response = yield client.torrentList();
     var torrents = _.map(response.torrents, parseTorrent);
     return torrents;
   }

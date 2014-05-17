@@ -26,7 +26,11 @@
     "underscore.string": "^2.3.3",
     "download-post-process": "git://github.com/axelhzf/download-post-process.git",
     "cacheman-file": "0.0.8",
-    "MD5": "^1.2.1"
+    "MD5": "^1.2.1",
+    "express": "^4.2.0",
+    "socket.io": "^0.9.16",
+    "socket.io-client": "^0.9.16",
+    "dnode": "^1.2.0"
   },
   "devDependencies": {
     "gulp": "^3.6.2",
