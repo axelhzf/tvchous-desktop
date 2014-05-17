@@ -19,8 +19,8 @@ var remote = Proxy.create({
 });
 
 function connect () {
-  var host = process.env.SERVER_HOST;
-  var port = process.env.SERVER_PORT;
+  var host = process.env.SERVER_HOST || "localhost";
+  var port = process.env.SERVER_PORT || 5004;
   var d = dnode.connect({host: host, port: port}, function (_remote) {
     remote = _remote;
   });
