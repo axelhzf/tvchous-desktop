@@ -24,7 +24,7 @@ angular.module("app").factory("fileSystemService", function (configurationServic
   }
 
   function* mountFile(file) {
-    if (process.env.SERVER_MOUNT) {
+    if (file && process.env.SERVER_MOUNT ) {
       var basePath = yield remote.basePath();
       return path.join(process.env.SERVER_MOUNT, file.substring(basePath.length));
     }

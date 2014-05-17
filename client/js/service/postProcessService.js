@@ -10,6 +10,7 @@ angular.module("app").factory("postProcessService", function (configurationServi
     console.log("start", basePath, destPath);
     try {
       watcher = downloadPostProcess.watcher(basePath, destPath);
+      watcher.start();
     } catch(e) {
       console.log("postProcess service error", e);
     }
