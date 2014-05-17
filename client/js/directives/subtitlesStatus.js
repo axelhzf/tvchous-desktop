@@ -1,4 +1,4 @@
-var remote = require("client/js/service/remote");
+var remote = require("./client/js/service/remote");
 
 angular.module("app").directive("subtitlesStatus", function () {
   return {
