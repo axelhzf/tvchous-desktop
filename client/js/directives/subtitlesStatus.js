@@ -1,4 +1,6 @@
-angular.module("app").directive("subtitlesStatus", function (subtitlesService) {
+var remote = require("client/js/service/remote");
+
+angular.module("app").directive("subtitlesStatus", function () {
   return {
     restrict: "E",
     templateUrl: "dist/views/subtitles_status.html",
@@ -13,7 +15,7 @@ angular.module("app").directive("subtitlesStatus", function (subtitlesService) {
           var langs = notFoundLanguages();
           for (var i = 0; i < langs.length; i++) {
             try {
-              yield subtitlesService.downloadSubtitle(scope.episode.local.file, langs[i]);
+              yield remote.downloadSubtitle(scope.episode.local.file, langs[i]);
             } catch (e) {
               console.error(e);
             }

@@ -1,5 +1,5 @@
 angular.module("app").controller("SeasonController",
-  function ($scope, $stateParams, traktService, execService, pirateshipService, subtitlesService) {
+  function ($scope, $stateParams, traktService, execService, pirateshipService) {
 
     function init () {
       findEpisodes();
@@ -35,8 +35,7 @@ angular.module("app").controller("SeasonController",
 
     _.extend($scope, {
       playEpisode: playEpisode,
-      downloadEpisode: downloadEpisode,
-      downloadSubtitle: subtitlesService.downloadSubtitle
+      downloadEpisode: downloadEpisode
     });
 
     init();

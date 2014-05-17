@@ -5,6 +5,7 @@ var path = require("path");
 var co = require("co");
 var exec = require("co-exec");
 var Utorrent = require('utorrent-api');
+var subtitlesDownloader = require("subtitles-downloader");
 
 var PATH_DOWNLOADED = process.env.PATH_DOWNLOADED;
 var PATH_SHOWS = process.env.PATH_SHOWS;
@@ -34,6 +35,11 @@ var server = dnode({
   downloadTorrent: function (link, cb) {
     co(function *() {
       return yield exec("open /Applications/uTorrent.app " + link);
+    })(cb);
+  },
+  downloadSubtitle: function (file, lang, cb) {
+    co(function* () {
+      yield downloadSubtitle(file, lang);
     })(cb);
   }
 });
