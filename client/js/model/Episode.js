@@ -18,6 +18,13 @@ Episode.prototype.match = function (title) {
   return normalizeTitle(currentTitle) === normalizeTitle(title);
 };
 
+Episode.prototype.isHd = function () {
+  if(this.local && this.local.file) {
+    var lowerFile = this.local.file.toLowerCase();
+    return _s.contains(lowerFile, "720p") || _.contains(lowerFile, "720p");
+  }
+};
+
 function normalizeTitle (title) {
   var episodeMatch = title.match(/([^/]*\.S\d\dE\d\d)/i);
   if (!episodeMatch) return;

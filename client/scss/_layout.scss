@@ -169,7 +169,7 @@ table {
   }
 
   .actions {
-    width: 70px;
+    width: 100px;
     text-align: right;
 
     span {
@@ -217,4 +217,8 @@ table {
 
 .subtitles-status-all {
   color: $green;
+}
+
+.hd {
+  height: 15px;
 }
