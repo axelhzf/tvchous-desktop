@@ -1,4 +1,5 @@
 var defer = require("co-defer");
+var co = require("co");
 
 function Timer (gen, timeout) {
   this.gen = gen;
@@ -9,6 +10,7 @@ function Timer (gen, timeout) {
 Timer.prototype = {
   start: function () {
     if (!this._intervalObject) {
+      defer.nextTick(this.gen);
       this._intervalObject = defer.setInterval(this.gen, this.timeout);
     }
   },
