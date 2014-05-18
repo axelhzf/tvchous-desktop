@@ -33,8 +33,12 @@ angular.module("app").factory("episodeUpdaterService", function ($rootScope) {
   }
 
   function* periodic() {
-    for(var i= 0; i < tasks.length; i++) {
-      yield tasks[i](watchedEpisodes);
+    try {
+      for (var i = 0; i < tasks.length; i++) {
+        yield tasks[i](watchedEpisodes);
+      }
+    }catch(e) {
+      console.error("Error executing periodic task", e);
     }
 
     if (!$rootScope.$$phase) {

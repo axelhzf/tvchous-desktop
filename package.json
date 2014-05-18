@@ -31,7 +31,8 @@
     "socket.io": "^0.9.16",
     "socket.io-client": "^0.9.16",
     "dnode": "^0.9.12",
-    "underscore": "~1.6.0"
+    "underscore": "~1.6.0",
+    "humanize": "0.0.9"
   },
   "devDependencies": {
     "gulp": "^3.6.2",

@@ -39,6 +39,6 @@ gulp.task("watch", ["sass", "views"], function () {
 gulp.task("test", function () {
   gulp.src([
     "client/js/model/Episode.js",
-    "test/model/Episode.spec.js"
+    "test/**/*.spec.js"
   ]).pipe(mocha())
 });
