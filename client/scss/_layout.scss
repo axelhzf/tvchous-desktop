@@ -59,18 +59,8 @@ $header-height: 60px;
   }
 }
 
-.main-container {
-  margin-right: auto;
-  margin-left: auto;
-  padding-left: 15px;
-  padding-right: 15px;
-}
-
 .main-content {
-  padding-top: $header-height;
-}
-
-.content {
+  padding-top: $header-height + 15px;
   padding-left: 15px;
   padding-right: 15px;
 }
@@ -99,7 +89,6 @@ li {
 }
 
 .show header {
-  padding: 20px;
   display: flex;
   flex-direction: row;
 
@@ -117,14 +106,21 @@ li {
 
     }
   }
+
+  .seasons {
+    font-size: 24px;
+    font-weight: lighter;
+
+    .active {
+      color: $green;
+    }
+  }
 }
+
+
 
 .show-content {
 
-}
-
-.show-episode-details {
-  padding: 0 20px 20px 20px;
 }
 
 ul.inline {
@@ -141,17 +137,13 @@ table {
   width: 100%;
   border-collapse: collapse;
 
+  td, th {
+    padding: 7px;
+  }
+
   td {
     border-top: 1px solid $border-color;
     border-bottom: 1px solid $border-color;
-    padding: 7px;
-
-    &:first-child {
-      padding-left: 20px;
-    }
-    &:last-child {
-      padding-right: 20px;
-    }
   }
 }
 
