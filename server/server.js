@@ -72,6 +72,9 @@ exports.start = function (cb) {
       }
       var pid = yield cfs.readFile(PID_FILE, {encoding: "utf-8"});
       pid = parseInt(pid, 10);
+      if(pid === process.pid) {
+        return;
+      }
 
       try {
         yield exec("kill -9 " + pid);
