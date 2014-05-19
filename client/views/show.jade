@@ -8,7 +8,8 @@ spinner(wait-for="show")
         div Seasons
         ul.seasons.inline
           li(ng-repeat="season in show.seasons")
-            a(ui-sref="show.season({showId: show.id, seasonId: season.id})")
+            a(ui-sref="show.season({showId: show.id, seasonId: season.id})", ui-sref-active="active")
               | {{season.season}}
+            span(ng-if="!$last")  /
 
     .show-content(ui-view="")

@@ -6,6 +6,8 @@ var co = require("co");
 var exec = require("co-exec");
 var Utorrent = require('utorrent-api');
 var subtitlesDownloader = require("subtitles-downloader");
+var npid = require('npid');
+var cfs = require("co-fs");
 
 var PATH_DOWNLOADED = process.env.PATH_DOWNLOADED;
 var PATH_SHOWS = process.env.PATH_SHOWS;
@@ -29,7 +31,7 @@ var server = dnode({
       return files;
     })(cb);
   },
-  torrentList : function (cb) {
+  torrentList: function (cb) {
     co(function *() {
       return yield utorrentCall("list");
     })(cb);
@@ -46,6 +48,32 @@ var server = dnode({
   }
 });
 
-exports.start = function () {
-  server.listen(5004);
+exports.start = function (cb) {
+  co(function* () {
+    var npid = require('npid');
+    var PID_FILE = "./tvchous.pid";
+    try {
+      var pid = npid.create(PID_FILE);
+      pid.removeOnExit();
+    } catch (err) {
+      if (err.code !== "EEXIST") {
+        process.exit(1);
+      }
+      var pid = yield cfs.readFile(PID_FILE, {encoding: "utf-8"});
+      pid = parseInt(pid, 10);
+
+      try {
+        yield exec("kill -9 " + pid);
+      } catch (e) {
+      }
+      yield cfs.unlink(PID_FILE);
+      var pid = npid.create(PID_FILE);
+      pid.removeOnExit();
+    }
+    try {
+      server.listen(5004);
+    } catch (e) {
+
+    }
+  })(cb);
 };
