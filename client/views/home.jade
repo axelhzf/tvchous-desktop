@@ -1,7 +1,14 @@
 .favorites.content
-  h1 FAVORITES
+  div(ng-if="!query")
+    h1 FAVORITES
+    spinner(wait-for="favorites")
+    .poster-list(ng-if="favorites")
+      a.poster-list-item(ng-repeat="show in favorites", ui-sref="show({showId: show.id })")
+        img(ng-src="{{show.poster}}")
 
-  spinner(wait-for="shows")
-  .poster-list(ng-if="shows")
-    a.poster-list-item(ng-repeat="show in shows | filter: {title: query} | limitTo: 10", ui-sref="show({showId: show.id })")
-      img(ng-src="{{show.poster}}")
+  div(ng-if="query")
+    h1 SEARCH RESULT
+    spinner(wait-for="allShows")
+    .poster-list(ng-if="allShows")
+      a.poster-list-item(ng-repeat="show in allShows | filter: {title: query} | limitTo: 10", ui-sref="show({showId: show.id })")
+        img(ng-src="{{show.poster}}")

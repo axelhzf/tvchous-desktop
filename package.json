@@ -34,7 +34,8 @@
     "underscore": "~1.6.0",
     "humanize": "0.0.9",
     "npid": "^0.4.0",
-    "co-fs": "^1.2.0"
+    "co-fs": "^1.2.0",
+    "co-filter": "0.0.1"
   },
   "devDependencies": {
     "gulp": "^3.6.2",

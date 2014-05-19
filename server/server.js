@@ -8,6 +8,7 @@ var Utorrent = require('utorrent-api');
 var subtitlesDownloader = require("subtitles-downloader");
 var npid = require('npid');
 var cfs = require("co-fs");
+var filter = require("co-filter");
 
 var PATH_DOWNLOADED = process.env.PATH_DOWNLOADED;
 var PATH_SHOWS = process.env.PATH_SHOWS;
@@ -44,6 +45,16 @@ var server = dnode({
   downloadSubtitle: function (file, lang, cb) {
     co(function* () {
       yield downloadSubtitle(file, lang);
+    })(cb);
+  },
+  downloadedFolders: function (cb) {
+    co(function* () {
+      var downloadedFiles = yield cfs.readdir(PATH_SHOWS);
+      var downloadedDirectories = yield filter(downloadedFiles, function* (file) {
+        var stat = yield cfs.stat(path.join(PATH_SHOWS, file));
+        return stat.isDirectory();
+      });
+      return downloadedDirectories;
     })(cb);
   }
 });
