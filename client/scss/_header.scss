@@ -1,0 +1,30 @@
+.header {
+  z-index: 1;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: $header-height;
+  background-color: $grey;
+  border-bottom: 1px solid $border-color;
+  padding: 10px 20px;
+
+  i {
+    font-size: 30px;
+    margin-right: 10px;
+  }
+
+  form {
+    display: inline-block;
+  }
+
+  input, input[type="text"] {
+    font-size: 30px;
+    background-color: transparent;
+    border: none;
+    color: #fff;
+    width: 400px;
+    font-weight: 100;
+    outline: none;
+  }
+}
