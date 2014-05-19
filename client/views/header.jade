@@ -1,9 +1,9 @@
 .header(ng-controller="HeaderController")
   a(ui-sref="home")
     i(class="fa fa-home")
-  a
+  a(ng-click="previous()")
     i(class="fa fa-chevron-left")
-  a
+  a(ng-click="next()")
     i(class="fa fa-chevron-right")
 
   form(ng-submit="changeQuery(query)")

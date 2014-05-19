@@ -15,8 +15,18 @@ angular.module("app").controller("HeaderController", function ($scope, $state, $
     $state.go("search", {query: query}, {location: location});
   }
 
+  function next () {
+    history.forward();
+  }
+
+  function previous () {
+    history.back();
+  }
+
   _.extend($scope, {
-    changeQuery: changeQuery
+    changeQuery: changeQuery,
+    next: next,
+    previous: previous
   });
   init();
 });
