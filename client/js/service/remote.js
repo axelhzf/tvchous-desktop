@@ -5,13 +5,13 @@ var remote;
 var remote = Proxy.create({
   get: function (receiver, index) {
     if(index === "start") return connect;
-    if (!remote){
+    if (!receiver){
       throw new Error("Not connected yet");
     }
-    if(!remote[index]) {
+    if(!receiver[index]) {
       throw new Error("Client doesn't have method " + index);
     }
-    return thunkify(remote[index]);
+    return thunkify(receiver[index]);
   },
   set : function () {
     throw new Error("Can't modify properties");
