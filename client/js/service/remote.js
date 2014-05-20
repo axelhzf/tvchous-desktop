@@ -2,18 +2,24 @@ var dnode = require('dnode');
 var thunkify = require("thunkify");
 var remote;
 
-var remote = Proxy.create({
+var thunks = {};
+
+var proxy = Proxy.create({
   get: function (receiver, index) {
-    if(index === "start") return connect;
-    if (!receiver){
+    if (index === "start") return connect;
+    if (!remote) {
       throw new Error("Not connected yet");
     }
-    if(!receiver[index]) {
+    if (!remote[index]) {
       throw new Error("Client doesn't have method " + index);
     }
-    return thunkify(receiver[index]);
+    if (!thunks[index]) {
+      console.log("creating thunk", index);
+      thunks[index] = thunkify(remote[index]);
+    }
+    return thunks[index];
   },
-  set : function () {
+  set: function () {
     throw new Error("Can't modify properties");
   }
 });
@@ -27,4 +33,4 @@ function connect () {
   });
 }
 
-module.exports = remote;
+module.exports = proxy;
