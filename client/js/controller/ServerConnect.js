@@ -13,12 +13,6 @@ angular.module("app").controller("ServerConnect", function ($scope, $timeout) {
   function connect () {
     console.log("try to connect");
     remote.connect();
-
-    setTimeout(function () {
-      if (!$scope.connected) {
-        connect();
-      }
-    }, 5000);
   }
 
   function destroy() {
@@ -26,7 +20,6 @@ angular.module("app").controller("ServerConnect", function ($scope, $timeout) {
   }
 
   function onRemoteConnected () {
-    console.log("connected!");
     $scope.$apply(function () {
       $scope.connected = true;
     });
@@ -41,6 +34,7 @@ angular.module("app").controller("ServerConnect", function ($scope, $timeout) {
   function onRemoteError (e) {
     if (!$scope.connected) {
       //try to reconnect
+
     }
   }
 

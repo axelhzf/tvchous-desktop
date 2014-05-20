@@ -57,6 +57,8 @@ var server = dnode({
       return downloadedDirectories;
     })(cb);
   }
+}, {
+  weak: false
 });
 
 exports.start = function (cb) {

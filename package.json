@@ -28,15 +28,14 @@
     "cacheman-file": "0.0.8",
     "MD5": "^1.2.1",
     "express": "^4.2.0",
-    "socket.io": "^0.9.16",
-    "socket.io-client": "^0.9.16",
-    "dnode": "^0.9.12",
     "underscore": "~1.6.0",
     "humanize": "0.0.9",
     "npid": "^0.4.0",
     "co-fs": "^1.2.0",
     "co-filter": "0.0.1",
-    "keymaster": "^1.6.2"
+    "keymaster": "^1.6.2",
+    "dnode": "^1.2.0",
+    "reconnect-net": "0.0.0"
   },
   "devDependencies": {
     "gulp": "^3.6.2",
