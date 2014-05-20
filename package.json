@@ -3,7 +3,7 @@
   "main": "index.html",
   "js-flags": "--harmony",
   "window": {
-    "toolbar": false,
+    "toolbar": true,
     "width": 800,
     "height": 600
   },

@@ -13,11 +13,7 @@ app.run(function (episodeUpdaterService, fileSystemService, utorrentService, pos
 
   if(!process.env.SERVER_HOST) {
     console.log("server start");
-    server.start(function () {
-      remote.start();
-    });
-  } else {
-    remote.start();
+    server.start();
   }
 
 });

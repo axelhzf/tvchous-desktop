@@ -91,3 +91,9 @@ exports.start = function (cb) {
     }
   })(cb);
 };
+
+exports.stop = function () {
+  server.end();
+};
+
+process.on('exit', exports.stop);

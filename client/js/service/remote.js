@@ -1,36 +1,59 @@
 var dnode = require('dnode');
 var thunkify = require("thunkify");
-var remote;
+var EventEmitter = require("events").EventEmitter;
+var _ = require("underscore");
+var net = require('net');
 
-var thunks = {};
+var Remote = function () {
+  this.events = new EventEmitter();
+  this.d = dnode();
+  this.bindEvents();
+};
 
-var proxy = Proxy.create({
-  get: function (receiver, index) {
-    if (index === "start") return connect;
-    if (!remote) {
-      throw new Error("Not connected yet");
-    }
-    if (!remote[index]) {
-      throw new Error("Client doesn't have method " + index);
-    }
-    if (!thunks[index]) {
-      console.log("creating thunk", index);
-      thunks[index] = thunkify(remote[index]);
-    }
-    return thunks[index];
+Remote.prototype = {
+  bindEvents: function () {
+    this.d.on("error", this.onError.bind(this));
+    this.d.on("end", this.onEnd.bind(this));
   },
-  set: function () {
-    throw new Error("Can't modify properties");
+  host: function () {
+    return process.env.SERVER_HOST || "localhost";
+  },
+  port: function () {
+    return process.env.SERVER_PORT || 5004;
+  },
+  connect: function () {
+    var host = this.host();
+    var port = this.port();
+    this.d.connect({host: host, port: port}, this.onRemote.bind(this));
+  },
+  disconnect: function () {
+    if (this.connection) {
+      this.d.end();
+    }
+  },
+  onRemote: function (connection) {
+    this.connection = connection;
+    this.bindRemoteMethods();
+    this.events.emit("connected");
+  },
+  onError: function (e) {
+    this.events.emit("error", e);
+  },
+  onEnd: function () {
+    this.unbindRemoteMethods();
+    delete this.connection;
+    this.events.emit("disconnected");
+  },
+  bindRemoteMethods: function () {
+    _.each(_.keys(this.connection), function (methodName) {
+      this[methodName] = thunkify(this.connection[methodName]);
+    }, this);
+  },
+  unbindRemoteMethods: function () {
+    _.each(_.keys(this.connection), function (methodName) {
+      delete this[methodName];
+    }, this);
   }
-});
+};
 
-function connect () {
-  var host = process.env.SERVER_HOST || "localhost";
-  var port = process.env.SERVER_PORT || 5004;
-  console.log("Connecting to ", host, port);
-  var d = dnode.connect({host: host, port: port}, function (_remote) {
-    remote = _remote;
-  });
-}
-
-module.exports = proxy;
+module.exports = new Remote();
