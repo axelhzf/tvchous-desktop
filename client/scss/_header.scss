@@ -8,14 +8,35 @@
   background-color: $grey;
   border-bottom: 1px solid $border-color;
   padding: 10px 20px;
+  display: flex;
+  align-items: baseline;
 
-  i {
-    font-size: 30px;
+  .header-left {
+
+  }
+
+  .header-center {
+    flex-grow: 1;
+    margin-left: 10px;
     margin-right: 10px;
   }
 
+  .header-right {
+
+  }
+
+
+  a {
+    font-size: 30px;
+    margin-right: 10px;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
   form {
-    display: inline-block;
+    width: 100%;
   }
 
   input, input[type="text"] {
@@ -23,7 +44,7 @@
     background-color: transparent;
     border: none;
     color: #fff;
-    width: 400px;
+    width: 100%;
     font-weight: 100;
     outline: none;
   }

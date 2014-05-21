@@ -1,14 +1,17 @@
 .header(ng-controller="HeaderController")
-  a(ui-sref="home")
-    i(class="fa fa-home")
-  a(ng-click="previous()")
-    i(class="fa fa-chevron-left")
-  a(ng-click="next()")
-    i(class="fa fa-chevron-right")
+  .header-left
+    a(ui-sref="home")
+      i(class="fa fa-home")
+    a(ng-click="previous()")
+      i(class="fa fa-chevron-left")
+    a(ng-click="next()")
+      i(class="fa fa-chevron-right")
 
-  form(ng-submit="changeQuery(query)")
-    input(type="text", ng-model="query", placeholder="Search...")
+  .header-center
+    form(ng-submit="changeQuery(query)")
+      input(type="text", ng-model="query", placeholder="Search...")
 
-  a(ui-sref="config")
-    i(class="fa fa-cog")
+  .header-right
+    a(ui-sref="config")
+      i(class="fa fa-cog")
 
