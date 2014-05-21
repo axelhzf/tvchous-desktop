@@ -124,20 +124,7 @@ table {
   }
 }
 
-.poster-list {
-  @include clearfix;
-}
 
-.poster-list-item {
-  display: block;
-  float: left;
-
-  img {
-    width: 200px;
-    height: 294px;
-    display: block;
-  }
-}
 
 .favorites {
 
