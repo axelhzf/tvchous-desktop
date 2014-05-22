@@ -1,4 +1,3 @@
-var TRAKT_API_KEY = process.env.TRAKT_API_KEY;
 var TRAKT_BASE= "http://api.trakt.tv"
 
 var co = require("co");
@@ -8,6 +7,7 @@ var thunkify = require("thunkify");
 var Cacheman = require('cacheman');
 var _ = require("underscore");
 var md5 = require('MD5');
+var configuration = require("./client/js/service/configuration");
 
 var Show = require("./client/js/model/Show");
 var Season = require("./client/js/model/Season");
@@ -22,7 +22,7 @@ angular.module("app").service("traktService", function () {
   var shows;
 
   function* findShows () {
-    var url = TRAKT_BASE + "/shows/trending.json/" + TRAKT_API_KEY;
+    var url = TRAKT_BASE + "/shows/trending.json/" + apiKey();
     shows = yield apiRequest(url, Show);
     return shows;
   }
@@ -32,7 +32,7 @@ angular.module("app").service("traktService", function () {
     var show = _.findWhere(shows, {id: showId});
     if (!show) return;
 
-    var url = TRAKT_BASE + "/show/seasons.json/" + TRAKT_API_KEY + "/" + show.imdb_id;
+    var url = TRAKT_BASE + "/show/seasons.json/" + apiKey() + "/" + show.imdb_id;
     show.seasons = yield apiRequest(url, Season);
 
     return show;
@@ -43,7 +43,7 @@ angular.module("app").service("traktService", function () {
     var season = _.findWhere(show.seasons, {id: seasonId});
     if (!season) return;
 
-    var url = TRAKT_BASE + "/show/season.json/" + TRAKT_API_KEY + "/" + show.imdb_id + "/" + season.season;
+    var url = TRAKT_BASE + "/show/season.json/" + apiKey() + "/" + show.imdb_id + "/" + season.season;
     var extraAttrs = {_season: season, _show: show};
     season.episodes = yield apiRequest(url, Episode, extraAttrs);
 
@@ -62,7 +62,7 @@ angular.module("app").service("traktService", function () {
     if (!models) {
       var res = yield request(url, true);
       models = res.body;
-      cache.set(cacheKey, models);
+      yield cacheSet(cacheKey, models);
     }
 
     var result = _.map(models, function (model) {
@@ -70,6 +70,10 @@ angular.module("app").service("traktService", function () {
     });
 
     return result;
+  }
+
+  function apiKey () {
+    return configuration.get("traktApiKey");
   }
 
   return {

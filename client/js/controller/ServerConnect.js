@@ -1,13 +1,19 @@
 var remote = require("./client/js/service/remote");
+var configuration = require("./client/js/service/configuration");
 
-angular.module("app").controller("ServerConnect", function ($scope, $timeout) {
+angular.module("app").controller("ServerConnect", function ($scope, $state) {
 
   function init() {
-    $scope.connected = false;
-    $scope.host = remote.host();
-    $scope.port = remote.port();
+    if(configuration.get("firstTime")) {
+      configuration.set("firstTime", false);
 
-    connect();
+      $state.go("config");
+    } else {
+      $scope.connected = false;
+      $scope.host = remote.host();
+      $scope.port = remote.port();
+      connect();
+    }
   }
 
   function connect () {
@@ -22,6 +28,7 @@ angular.module("app").controller("ServerConnect", function ($scope, $timeout) {
   function onRemoteConnected () {
     $scope.$apply(function () {
       $scope.connected = true;
+      console.log("remote connected");
     });
   }
 

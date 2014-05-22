@@ -8,7 +8,7 @@
       a.poster-list-item(ng-repeat="show in favorites", ui-sref="show({showId: show.id })")
         img(ng-src="{{show.poster}}")
 
-  div(ng-if="!query && !favorites && allShows")
+  div(ng-if="!query && allShows && !favorites.length")
     h1 SHOWS
     .poster-list
       a.poster-list-item(ng-repeat="show in allShows | limitTo: 10", ui-sref="show({showId: show.id })")

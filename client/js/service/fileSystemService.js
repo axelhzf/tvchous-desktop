@@ -1,10 +1,9 @@
 var path = require("path");
-var thunkify = require("thunkify");
 var each = require("co-each");
 var parallel = require("co-parallel");
 var remote = require("./client/js/service/remote");
 
-angular.module("app").factory("fileSystemService", function (configurationService) {
+angular.module("app").factory("fileSystemService", function () {
 
   function* updateEpisodes (episodes) {
     yield parallel(episodes.map(episodeLocalInfo), 5);

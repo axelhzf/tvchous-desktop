@@ -1,5 +1,5 @@
 angular.module("app").controller("ShowController",
-  function ($scope, $stateParams, $state, traktService, pirateshipService) {
+  function ($scope, $stateParams, $state, traktService) {
 
     function init () {
       findShow();

@@ -4,6 +4,7 @@ var EventEmitter = require("events").EventEmitter;
 var _ = require("underscore");
 var net = require('net');
 var reconnect = require("reconnect-net");
+var configuration = require("./configuration");
 
 var Remote = function () {
   this.events = new EventEmitter();
@@ -11,10 +12,12 @@ var Remote = function () {
 
 Remote.prototype = {
   host: function () {
-    return process.env.SERVER_HOST || "localhost";
+    var isLocal = configuration.get("runAs") === "local";
+    return isLocal? "localhost" : configuration.get("remoteHost");
   },
   port: function () {
-    return process.env.SERVER_PORT || 5004;
+    var isLocal = configuration.get("runAs") === "local";
+    return isLocal? configuration.get("serverPort") : configuration.get("remotePort");
   },
   connect: function () {
     var connectOptions = {
