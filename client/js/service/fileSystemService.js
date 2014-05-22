@@ -2,6 +2,7 @@ var path = require("path");
 var each = require("co-each");
 var parallel = require("co-parallel");
 var remote = require("./client/js/service/remote");
+var configuration = require("./client/js/service/configuration");
 
 angular.module("app").factory("fileSystemService", function () {
 
@@ -23,9 +24,10 @@ angular.module("app").factory("fileSystemService", function () {
   }
 
   function* mountFile(file) {
-    if (file && process.env.SERVER_MOUNT ) {
+    var mount = configuration.get("remoteMount");
+    if (file && mount ) {
       var basePath = yield remote.basePath();
-      return path.join(process.env.SERVER_MOUNT, file.substring(basePath.length));
+      return path.join(mount, file.substring(basePath.length));
     }
   }
 
