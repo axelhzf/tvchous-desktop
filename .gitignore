@@ -1,7 +1,12 @@
-node_modules
-dist
 .idea/
+*.iml
+
+cache
+build
+
+node_modules
+app/dist
+tmp
+
 run.sh
 run_remote.sh
-*.iml
-tmp

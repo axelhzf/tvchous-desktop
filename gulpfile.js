@@ -4,15 +4,16 @@ var jade = require("gulp-jade");
 var gutil = require("gulp-util");
 var autoprefixer = require("gulp-autoprefixer");
 var mocha = require("gulp-mocha");
+var NwBuilder = require('node-webkit-builder');
 
 var path = {
   client: {
-    sass: "client/scss/**/*.scss",
-    views: "client/views/**/*.jade"
+    sass: "app/client/scss/**/*.scss",
+    views: "app/client/views/**/*.jade"
   },
   dist: {
-    css: "dist/css",
-    views: "dist/views/"
+    css: "app/dist/css",
+    views: "app/dist/views/"
   }
 };
 
@@ -41,4 +42,30 @@ gulp.task("test", function () {
     "client/js/model/Episode.js",
     "test/**/*.spec.js"
   ]).pipe(mocha())
+});
+
+gulp.task("nw", function (callback) {
+  var nw = new NwBuilder({
+    version: '0.9.2',
+    files: ["./app/**"],
+    platforms: ['osx'],
+    appName: "TvChous"
+  });
+
+  // Log stuff you want
+  nw.on('log', function (mgs) {
+    gutil.log('node-webkit-builder', mgs);
+  });
+
+  // Build retruns a promise
+  nw.build(function (err) {
+    console.log(arguments);
+    if(err) {
+      gutil.log('node-webkit-builder error', err);
+    }
+    callback();
+    gutil.beep();
+  });
+
+
 });

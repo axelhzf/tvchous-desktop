@@ -1,4 +1,4 @@
-var humanizeEta = require("../../client/js/filter/humanizeEta");
+var humanizeEta = require("../../app/client/js/filter/humanizeEta");
 var expect = require("chai").expect;
 
 var second = 1;

@@ -1,8 +1,8 @@
 var expect = require("chai").expect;
 
-var Show = require("../../client/js/model/Show");
-var Season = require("../../client/js/model/Season");
-var Episode = require("../../client/js/model/Episode");
+var Show = require("../../app/client/js/model/Show");
+var Season = require("../../app/client/js/model/Season");
+var Episode = require("../../app/client/js/model/Episode");
 
 describe("Episode", function () {
   describe("match", function () {

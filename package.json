@@ -1,42 +1,7 @@
 {
-  "name": "tvchous",
-  "main": "index.html",
-  "js-flags": "--harmony",
-  "window": {
-    "toolbar": false,
-    "width": 800,
-    "height": 600
-  },
+  "name": "tvchous-build",
   "dependencies": {
-    "coffee-script": "^1.7.1",
-    "request": "^2.34.0",
-    "cacheman": "^1.0.2",
-    "pirateship": "git://github.com/axelhzf/pirateship.git#master",
-    "async": "^0.8.0",
-    "glob": "^3.2.9",
-    "co": "^3.0.6",
-    "thunkify": "^2.1.1",
-    "cogent": "^0.4.3",
-    "co-parallel": "^1.0.0",
-    "co-exec": "^1.1.0",
-    "utorrent-api": "^0.1.3",
-    "co-defer": "^0.1.0",
-    "co-each": "^0.1.0",
-    "subtitles-downloader": "^0.1.0",
-    "underscore.string": "^2.3.3",
-    "download-post-process": "git://github.com/axelhzf/download-post-process.git",
-    "cacheman-file": "0.0.8",
-    "MD5": "^1.2.1",
-    "express": "^4.2.0",
-    "underscore": "~1.6.0",
-    "humanize": "0.0.9",
-    "npid": "^0.4.0",
-    "co-fs": "^1.2.0",
-    "co-filter": "0.0.1",
-    "keymaster": "^1.6.2",
-    "dnode": "^1.2.0",
-    "reconnect-net": "0.0.0",
-    "mkdirp": "^0.5.0"
+
   },
   "devDependencies": {
     "gulp": "^3.6.2",
@@ -46,6 +11,7 @@
     "gulp-autoprefixer": "0.0.7",
     "mocha": "^1.18.2",
     "gulp-mocha": "^0.4.1",
-    "chai": "^1.9.1"
+    "chai": "^1.9.1",
+    "node-webkit-builder": "git://github.com/mllrsohn/node-webkit-builder.git#master"
   }
 }
