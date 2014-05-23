@@ -1,3 +1,5 @@
+var remote = require("./client/js/service/remote");
+
 angular.module("app").controller("SeasonController",
   function ($scope, $stateParams, traktService, execService, pirateshipService) {
 
@@ -17,21 +19,32 @@ angular.module("app").controller("SeasonController",
     function playEpisode (episode) {
       co(function *() {
         var file = episode.local.mountFile || episode.local.file;
-        console.log("play file", file);
         yield execService.playFile(file);
       })();
     }
 
     function downloadEpisode (episode) {
       co(function *() {
-        if (!episode.torrents) {
-          var q = episode._show.id + " " + episode.fullId;
-          episode.torrents = yield pirateshipService.findTorrents(q);
-        }
-        var torrent = findHdTorrent(episode.torrents) || episode.torrents[0];
-        console.log("Downloading torrent", torrent.title);
+        var torrent = yield findFirstHDTorrentForEpisode(episode);
         yield execService.downloadTorrent(torrent.link);
       })();
+    }
+
+    function streamEpisode (episode) {
+      co(function* () {
+        console.log("call stream episode");
+        var torrent = yield findFirstHDTorrentForEpisode(episode);
+        yield remote.streamTorrent(torrent.link);
+      })();
+    }
+
+    function* findFirstHDTorrentForEpisode (episode) {
+      if (!episode.torrents) {
+        var q = episode._show.id + " " + episode.fullId;
+        episode.torrents = yield pirateshipService.findTorrents(q);
+      }
+      var torrent = findHdTorrent(episode.torrents) || episode.torrents[0];
+      return torrent;
     }
 
     function findHdTorrent(torrents) {
@@ -42,7 +55,8 @@ angular.module("app").controller("SeasonController",
 
     _.extend($scope, {
       playEpisode: playEpisode,
-      downloadEpisode: downloadEpisode
+      downloadEpisode: downloadEpisode,
+      streamEpisode: streamEpisode
     });
 
     init();
