@@ -1,4 +1,9 @@
 spinner(wait-for="season")
+
+modal(visible="loadingMsg")
+  p {{loadingMsg}}
+  spinner
+
 table.episodes-table(ng-if="season")
   tbody
     tr(ng-repeat="episode in season.episodes", update-episode="episode")
@@ -17,6 +22,9 @@ table.episodes-table(ng-if="season")
         span(ng-if="!episode.local.file && episode.isAired()")
           a(ng-click="downloadEpisode(episode)")
             i(class="fa fa-download")
-        streaming(episode="episode")
+        span(ng-if="!episode.local.file && episode.isAired()")
+          a(ng-click="streamEpisode(episode)")
+            i(class="fa fa-eye")
+
       td.aired-date
         span(title="{{episode.first_aired_date | date }}") {{episode.first_aired_date | relativeDate }}
