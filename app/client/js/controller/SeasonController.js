@@ -1,7 +1,9 @@
 var remote = require("./client/js/service/remote");
+var mediaPlayer = require("./client/js/lib/mediaPlayer");
+var torrents = require("./client/js/lib/torrents");
 
 angular.module("app").controller("SeasonController",
-  function ($scope, $stateParams, traktService, execService, pirateshipService) {
+  function ($scope, $stateParams, traktService, execService) {
 
     function init () {
       findEpisodes();
@@ -25,32 +27,17 @@ angular.module("app").controller("SeasonController",
 
     function downloadEpisode (episode) {
       co(function *() {
-        var torrent = yield findFirstHDTorrentForEpisode(episode);
+        var torrent = yield torrents.defaultTorrentForEpisode(episode);
         yield execService.downloadTorrent(torrent.link);
       })();
     }
 
     function streamEpisode (episode) {
       co(function* () {
-        console.log("call stream episode");
-        var torrent = yield findFirstHDTorrentForEpisode(episode);
-        yield remote.streamTorrent(torrent.link);
+        var torrent = yield torrents.defaultTorrentForEpisode(episode);
+        var href = yield remote.startStreamingTorrent(torrent.link);
+        mediaPlayer.playRemote(href);
       })();
-    }
-
-    function* findFirstHDTorrentForEpisode (episode) {
-      if (!episode.torrents) {
-        var q = episode._show.id + " " + episode.fullId;
-        episode.torrents = yield pirateshipService.findTorrents(q);
-      }
-      var torrent = findHdTorrent(episode.torrents) || episode.torrents[0];
-      return torrent;
-    }
-
-    function findHdTorrent(torrents) {
-      return _.find(torrents, function (torrent) {
-        return torrent.title.toLowerCase().indexOf("720p") !== -1;
-      });
     }
 
     _.extend($scope, {

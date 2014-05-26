@@ -1,5 +1,7 @@
+var torrents = require("./client/js/lib/torrents");
+
 angular.module("app").controller("EpisodeController",
-  function ($scope, $stateParams, traktService, pirateshipService, execService) {
+  function ($scope, $stateParams, traktService, execService) {
     function init () {
       findEpisode();
     }
@@ -15,7 +17,7 @@ angular.module("app").controller("EpisodeController",
 
         if (!$scope.episode.torrents) {
           var q = $scope.episode._show.id + " " + $scope.episode.fullId;
-          $scope.episode.torrents = yield pirateshipService.findTorrents(q);
+          $scope.episode.torrents = yield torrents.findTorrents(q);
           $scope.$apply();
         }
 

@@ -5,7 +5,7 @@ module.config(function ($stateProvider, $urlRouterProvider) {
 
   $stateProvider.state("serverConnect", {
     abstract: true,
-    templateUrl: "dist/views/server-connect.html",
+    templateUrl: "dist/views/server_connect.html",
     controller: "ServerConnect"
   });
 

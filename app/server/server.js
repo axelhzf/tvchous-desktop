@@ -9,11 +9,11 @@ var subtitlesDownloader = require("subtitles-downloader");
 var npid = require('npid');
 var cfs = require("co-fs");
 var filter = require("co-filter");
-var configuration = require("../client/js/service/configuration");
 var downloadPostProcess = require("download-post-process");
 var mkdirp = thunkify(require("mkdirp"));
-var peerflix = require("peerflix");
-var address = require('network-address');
+
+var streaming = require("./streaming");
+var configuration = require("../client/js/service/configuration");
 
 var utorrentCall;
 var watcher;
@@ -58,20 +58,9 @@ var server = dnode({
       return downloadedDirectories;
     })(cb);
   },
-  streamTorrent: function (torrent, cb) {
-    console.log("call stream torrent", torrent);
-    var engine = peerflix(torrent);
-    engine.on("ready", function () {
-
-      var href = 'http://'+address()+':'+engine.server.address().port+'/';
-      var filename = engine.server.index.name.split('/').pop().replace(/\{|\}/g, '');
-      var filelength = engine.server.index.length;
-
-      console.log("streaming href", href);
-
-      cb(null, href);
-    });
-  }
+  startStreamingTorrent: streaming.startStreamingTorrent,
+  stopStreamingTorrent: streaming.stopStreamingTorrent,
+  getActiveStreamingTorrent: streaming.getActiveStreamingTorrent
 }, {
   weak: false
 });

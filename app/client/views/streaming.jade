@@ -1,0 +1,7 @@
+span(ng-if="episode.isAired() && !streaming")
+  a(ng-click="startStreaming()")
+    i(class="fa fa-eye")
+
+modal(visible="loading")
+  p Streaming torrent
+  spinner
