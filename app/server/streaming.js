@@ -1,6 +1,8 @@
 var _ = require("underscore");
+var path = require("path");
 var peerflix = require("peerflix");
 var address = require('network-address');
+var subtitlesDownloader = require("subtitles-downloader");
 
 var activeStreaming;
 
@@ -20,13 +22,21 @@ Streaming.prototype.close = function (cb) {
   cb();
 };
 
+function tempPath () {
+  return "./tmp";
+}
+
 function startStreamingTorrent (torrent, cb) {
   stopStreamingTorrent(function () {
     var engine = peerflix(torrent);
     engine.on("ready", function () {
       var streaming = new Streaming(engine, torrent);
       activeStreaming = streaming;
-      cb(null, streaming.href);
+
+      var filepath = path.join(tempPath(), streaming.filename);
+      subtitlesDownloader.downloadSubtitles({filepath: filepath, languages: ["eng", "spa"]}, function (err, subtitles) {
+        cb(null, {href: streaming.href, subtitles: subtitles});
+      });
     });
   })
 }

@@ -37,12 +37,16 @@ angular.module("app").controller("SeasonController",
     }
 
     function streamEpisode (episode) {
-      console.log("stream episode", episode);
       co(function* () {
         $scope.loadingMsg = "Streaming torrent";
         var torrent = yield torrents.defaultTorrentForEpisode(episode);
-        var href = yield remote.startStreamingTorrent(torrent.link);
-        mediaPlayer.playRemote(href, stopStreaming);
+        var streaming = yield remote.startStreamingTorrent(torrent.link);
+        var options = "";
+        if (streaming.subtitles && streaming.subtitles.length > 0) {
+          var sub = streaming.subtitles[0];
+          options += ' --sub-file="' + sub + '"';
+        }
+        mediaPlayer.playRemote(streaming.href, options, stopStreaming);
         delete $scope.loadingMsg;
       })();
     }

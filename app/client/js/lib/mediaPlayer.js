@@ -1,11 +1,11 @@
 var proc = require('child_process');
 
-function playFile (file, cb) {
-  runVlc(file, cb);
+function playFile (file, args, cb) {
+  runVlc(file, args, cb);
 }
 
-function playRemote (href, cb) {
-  runVlc(href, cb);
+function playRemote (href, args, cb) {
+  runVlc(href, args, cb);
 }
 
 function runVlc (href, args, cb) {
