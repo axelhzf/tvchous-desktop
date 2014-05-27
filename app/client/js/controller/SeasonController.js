@@ -46,14 +46,17 @@ angular.module("app").controller("SeasonController",
           var sub = streaming.subtitles[0];
           options += ' --sub-file="' + sub + '"';
         }
-        mediaPlayer.playRemote(streaming.href, options, stopStreaming);
+        console.log(options);
+        mediaPlayer.playRemote(streaming.href, options, function () {
+          stopStreaming(torrent);
+        });
         delete $scope.loadingMsg;
       })();
     }
 
-    function stopStreaming () {
+    function stopStreaming (torrent) {
       co(function* () {
-        yield remote.stopStreamingTorrent();
+        yield remote.stopStreamingTorrent(torrent);
       })();
     }
 
