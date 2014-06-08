@@ -1,5 +1,10 @@
 spinner(wait-for="season")
 
+modal(visible="activeStream")
+  p Streaming torrent
+  spinner
+  a.btn.btn-danger(ng-click="cancelStreaming()") Cancel
+
 modal(visible="loadingMsg")
   p {{loadingMsg}}
   spinner

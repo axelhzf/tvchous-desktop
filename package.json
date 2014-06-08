@@ -1,8 +1,6 @@
 {
   "name": "tvchous-build",
-  "dependencies": {
-
-  },
+  "dependencies": {},
   "devDependencies": {
     "gulp": "^3.6.2",
     "gulp-sass": "^0.7.1",
@@ -12,6 +10,8 @@
     "mocha": "^1.18.2",
     "gulp-mocha": "^0.4.1",
     "chai": "^1.9.1",
-    "node-webkit-builder": "git://github.com/mllrsohn/node-webkit-builder.git#master"
+    "node-webkit-builder": "git://github.com/mllrsohn/node-webkit-builder.git#master",
+    "gulp-zip": "^0.3.4",
+    "gulp-rename": "^1.2.0"
   }
 }

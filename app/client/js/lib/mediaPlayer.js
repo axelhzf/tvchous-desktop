@@ -1,4 +1,9 @@
-var proc = require('child_process');
+var proc = require("child_process");
+
+module.exports = {
+  playFile: playFile,
+  playRemote: playRemote
+};
 
 function playFile (file, args, cb) {
   runVlc(file, args, cb);
@@ -27,9 +32,6 @@ function runVlc (href, args, cb) {
 
 }
 
-module.exports = {
-  playFile: playFile,
-  playRemote: playRemote
-};
+
 
 

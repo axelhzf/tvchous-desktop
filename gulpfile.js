@@ -5,6 +5,8 @@ var gutil = require("gulp-util");
 var autoprefixer = require("gulp-autoprefixer");
 var mocha = require("gulp-mocha");
 var NwBuilder = require('node-webkit-builder');
+var zip = require("gulp-zip");
+var rename = require("gulp-rename");
 
 var path = {
   client: {
@@ -44,12 +46,21 @@ gulp.task("test", function () {
   ]).pipe(mocha())
 });
 
+gulp.task("zip", function () {
+  return gulp.src([
+    "./app/**",
+    "!./app/tmp/**"
+  ]).pipe(zip("build.nw"))
+    .pipe(gulp.dest("build"));
+});
+
 gulp.task("nw", function (callback) {
   var nw = new NwBuilder({
     version: '0.9.2',
     files: ["./app/**"],
-    platforms: ['osx'],
-    appName: "TvChous"
+    platforms: ["osx"],
+    appName: "TvChous",
+    appVersion: "0.0.2"
   });
 
   // Log stuff you want
@@ -60,7 +71,7 @@ gulp.task("nw", function (callback) {
   // Build retruns a promise
   nw.build(function (err) {
     console.log(arguments);
-    if(err) {
+    if (err) {
       gutil.log('node-webkit-builder error', err);
     }
     callback();

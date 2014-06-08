@@ -24,10 +24,13 @@ angular.module("app").factory("fileSystemService", function () {
   }
 
   function* mountFile(file) {
-    var mount = configuration.get("remoteMount");
-    if (file && mount ) {
-      var basePath = yield remote.basePath();
-      return path.join(mount, file.substring(basePath.length));
+    var runAs = configuration.get("runAs");
+    if (runAs === "remote") {
+      var mount = configuration.get("remoteMount");
+      if (file && mount ) {
+        var basePath = yield remote.basePath();
+        return path.join(mount, file.substring(basePath.length));
+      }
     }
   }
 

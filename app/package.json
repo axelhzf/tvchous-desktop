@@ -1,10 +1,10 @@
 {
   "name": "tvchous",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "main": "index.html",
   "js-flags": "--harmony",
   "window": {
-    "toolbar": true,
+    "toolbar": false,
     "width": 800,
     "height": 600
   },

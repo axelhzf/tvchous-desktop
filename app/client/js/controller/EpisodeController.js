@@ -1,7 +1,8 @@
 var torrents = require("./client/js/lib/torrents");
+var remote = require("./clients/js/service/remote");
 
 angular.module("app").controller("EpisodeController",
-  function ($scope, $stateParams, traktService, execService) {
+  function ($scope, $stateParams, traktService) {
     function init () {
       findEpisode();
     }
@@ -27,7 +28,7 @@ angular.module("app").controller("EpisodeController",
     function downloadTorrent (torrent) {
       co(function* () {
         var link = torrent.link;
-        yield execService.downloadTorrent(link);
+        yield remote.downloadTorrent(link);
       })();
     }
 

@@ -11,13 +11,12 @@ var cfs = require("co-fs");
 var filter = require("co-filter");
 var downloadPostProcess = require("download-post-process");
 var mkdirp = thunkify(require("mkdirp"));
-
-var streaming = require("./streaming");
 var configuration = require("../client/js/service/configuration");
 
 var utorrentCall;
 var watcher;
 
+var downloadSubtitle = thunkify(subtitlesDownloader.downloadSubtitle);
 var downloadSubtitle = thunkify(subtitlesDownloader.downloadSubtitle);
 
 var server = dnode({
@@ -44,7 +43,11 @@ var server = dnode({
   },
   downloadSubtitle: function (file, lang, cb) {
     co(function* () {
-      yield downloadSubtitle(file, lang);
+      try {
+        yield downloadSubtitle(file, lang);
+      } catch(e) {
+        console.log("error", e);
+      }
     })(cb);
   },
   downloadedFolders: function (cb) {
@@ -57,10 +60,7 @@ var server = dnode({
       });
       return downloadedDirectories;
     })(cb);
-  },
-  startStreamingTorrent: streaming.startStreamingTorrent,
-  stopStreamingTorrent: streaming.stopStreamingTorrent,
-  getActiveStreamingTorrent: streaming.getActiveStreamingTorrent
+  }
 }, {
   weak: false
 });
