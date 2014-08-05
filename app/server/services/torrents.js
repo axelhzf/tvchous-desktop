@@ -1,13 +1,21 @@
 var _ = require("underscore");
 var co = require("co");
+var exec = require("co-exec");
 var thunkify = require("thunkify");
 var pirateship = require("pirateship");
 
 var findTorrents = thunkify(pirateship.find);
 
+module.exports = {
+  findTorrents: findTorrents,
+  defaultTorrentForEpisode: defaultTorrentForEpisode,
+  downloadTorrent: downloadTorrent
+};
+
 function* defaultTorrentForEpisode(episode) {
   if (!episode.torrents) {
-    var q = episode._show.id + " " + episode.fullId;
+    var q = episode.showId + " " + episode.fullId;
+    console.log(q);
     episode.torrents = yield findTorrents(q);
   }
   var torrent = findHdTorrent(episode.torrents) || episode.torrents[0];
@@ -20,8 +28,6 @@ function findHdTorrent(torrents) {
   });
 }
 
-module.exports = {
-  findTorrents: findTorrents,
-  defaultTorrentForEpisode: defaultTorrentForEpisode
-};
-
+function *downloadTorrent (link) {
+  return yield exec("open /Applications/uTorrent.app " + link);
+}

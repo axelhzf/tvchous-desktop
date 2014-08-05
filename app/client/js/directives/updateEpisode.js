@@ -7,11 +7,11 @@ angular.module("app").directive("updateEpisode", function (episodeUpdaterService
     link: function (scope) {
 
       function init() {
-        episodeUpdaterService.watch(scope.episode);
+        //episodeUpdaterService.watch(scope.episode);
       }
 
       function destroy() {
-        episodeUpdaterService.stopWatch(scope.episode);
+        //episodeUpdaterService.stopWatch(scope.episode);
       }
 
       function changeEpisode(newEpisode, oldEpisode) {

@@ -4,7 +4,7 @@
   "main": "index.html",
   "js-flags": "--harmony",
   "window": {
-    "toolbar": false,
+    "toolbar": true,
     "width": 800,
     "height": 600
   },
@@ -35,6 +35,8 @@
     "pirateship": "git://github.com/axelhzf/pirateship.git#master",
     "reconnect-net": "0.0.0",
     "request": "^2.34.0",
+    "socket.io": "^1.0.6",
+    "socket.io-client": "^1.0.6",
     "subtitles-downloader": "^0.2.1",
     "thunkify": "^2.1.1",
     "tmp": "0.0.23",

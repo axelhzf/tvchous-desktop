@@ -1,10 +1,11 @@
 var remote = require("./client/js/service/remote");
 var mediaPlayer = require("./client/js/lib/mediaPlayer");
-var torrents = require("./client/js/lib/torrents");
 var streaming = require("./client/js/lib/streaming");
+var socketClient = require("./client/js/service/socketClient");
+
 
 angular.module("app").controller("SeasonController",
-  function ($scope, $stateParams, traktService) {
+  function ($scope, $stateParams) {
 
     function init () {
       findEpisodes();
@@ -14,7 +15,7 @@ angular.module("app").controller("SeasonController",
       var showId = $stateParams.showId;
       var seasonId = $stateParams.seasonId;
       co(function *() {
-        $scope.season = yield traktService.findSeason(showId, seasonId);
+        $scope.season = yield socketClient.call("findSeason", showId, seasonId);
         $scope.$apply();
       })();
     }
@@ -34,15 +35,17 @@ angular.module("app").controller("SeasonController",
     function downloadEpisode (episode) {
       co(function *() {
         $scope.loadingMsg = "Downloading torrent";
-        var torrent = yield torrents.defaultTorrentForEpisode(episode);
-        yield remote.downloadTorrent(torrent.link);
+        var torrent = yield socketClient.call("defaultTorrentForEpisode", episode);
+        yield socketClient.call("downloadTorrent", torrent.link);
         delete $scope.loadingMsg;
+
+        $scope.$apply();
       })();
     }
 
     function streamEpisode (episode) {
       co(function* () {
-        var torrent = yield torrents.defaultTorrentForEpisode(episode);
+        var torrent = yield socketClient.call("defaultTorrentForEpisode", episode);
         var torrentStream = streaming.startStreamingTorrent(torrent.link);
         $scope.activeStream = torrentStream;
 

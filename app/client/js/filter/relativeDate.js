@@ -21,6 +21,7 @@ var month = year / 12;
  */
 
 function relative(date, other) {
+  date = new Date(date);
   other = other || new Date;
   var suffix = other - date > 0 ? " ago" : "";
   var ms = Math.abs(other - date);

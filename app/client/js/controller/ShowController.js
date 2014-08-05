@@ -1,5 +1,7 @@
+var socketClient = require("./client/js/service/socketClient");
+
 angular.module("app").controller("ShowController",
-  function ($scope, $stateParams, $state, traktService) {
+  function ($scope, $stateParams, $state) {
 
     function init () {
       findShow();
@@ -8,7 +10,7 @@ angular.module("app").controller("ShowController",
     function findShow () {
       var showId = $stateParams.showId;
       co(function *() {
-        $scope.show = yield traktService.findShow(showId);
+        $scope.show = yield socketClient.call("findShow", showId);
         $scope.$apply();
 
         redirectToLastSeason();
@@ -19,7 +21,7 @@ angular.module("app").controller("ShowController",
       if ($state.$current.name === "show") {
         var showId = $scope.show.id;
         var seasonId = $scope.show.seasons[0].id;
-        $state.go("show.season", {showId: showId, seasonId: seasonId}, {location : "replace"});
+        $state.go("show.season", {showId: showId, seasonId: seasonId}, {location: "replace"});
       }
     }
 

@@ -13,6 +13,10 @@ var downloadPostProcess = require("download-post-process");
 var mkdirp = thunkify(require("mkdirp"));
 var configuration = require("../client/js/service/configuration");
 
+
+require("./socketServer");
+
+
 var utorrentCall;
 var watcher;
 
@@ -36,11 +40,6 @@ var server = dnode({
       return torrentList;
     })(cb);
   },
-  downloadTorrent: function (link, cb) {
-    co(function *() {
-      return yield exec("open /Applications/uTorrent.app " + link);
-    })(cb);
-  },
   downloadSubtitle: function (file, lang, cb) {
     co(function* () {
       try {
@@ -50,16 +49,8 @@ var server = dnode({
       }
     })(cb);
   },
-  downloadedFolders: function (cb) {
-    co(function* () {
-      var folder = configuration.get("tvshowsFolder");
-      var downloadedFiles = yield cfs.readdir(folder);
-      var downloadedDirectories = yield filter(downloadedFiles, function* (file) {
-        var stat = yield cfs.stat(path.join(folder, file));
-        return stat.isDirectory();
-      });
-      return downloadedDirectories;
-    })(cb);
+  downloadedFolders: function () {
+
   }
 }, {
   weak: false

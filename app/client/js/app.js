@@ -3,6 +3,9 @@ var app = angular.module("app", ["ui.router"]);
 var remote = require("./client/js/service/remote");
 var configuration = require("./client/js/service/configuration");
 
+
+require("./client/js/service/socketClient");
+
 app.run(function (episodeUpdaterService, fileSystemService, utorrentService) {
 
   episodeUpdaterService.addTask(fileSystemService.updateEpisodes);

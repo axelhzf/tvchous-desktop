@@ -12,7 +12,7 @@ modal(visible="loadingMsg")
 table.episodes-table(ng-if="season")
   tbody
     tr(ng-repeat="episode in season.episodes", update-episode="episode")
-      td.is-aired: i(class="fa fa-circle", ng-class="{aired: episode.isAired()}")
+      td.is-aired: i(class="fa fa-circle", ng-class="{aired: episode.isAired}")
       td.title
         a(ui-sref="show.episode({showId: episode._show.id, seasonId: episode._season.id, episodeId: episode.id})")
           | {{episode.fullId}} - {{episode.title}}
@@ -24,10 +24,10 @@ table.episodes-table(ng-if="season")
         span(ng-if="episode.local.file")
           a(ng-click="playEpisode(episode)", title="{{episode.local.file}}")
             i(class="fa fa-play-circle")
-        span(ng-if="!episode.local.file && episode.isAired()")
+        span(ng-if="!episode.local.file && episode.isAired")
           a(ng-click="downloadEpisode(episode)")
             i(class="fa fa-download")
-        span(ng-if="!episode.local.file && episode.isAired()")
+        span(ng-if="!episode.local.file && episode.isAired")
           a(ng-click="streamEpisode(episode)")
             i(class="fa fa-eye")
 
