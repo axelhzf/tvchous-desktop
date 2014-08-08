@@ -1,29 +1,29 @@
-var socketClient = require("./client/js/service/socketClient");
+var client = require("./client/js/lib/client");
 
-angular.module("app").controller("ShowController",
-  function ($scope, $stateParams, $state) {
+function ShowController ($scope, $state, $stateParams) {
+  this.$scope = $scope;
+  this.$state = $state;
+  this.$stateParams = $stateParams;
 
-    function init () {
-      findShow();
+  this.findShow()();
+}
+
+ShowController.prototype = {
+  findShow: function* () {
+    var showId = this.$stateParams.showId;
+    this.show = yield client.call("findShow", showId);
+    console.log(this.show);
+    this.redirectToLastSeason();
+  },
+  redirectToLastSeason: function () {
+    if (this.$state.$current.name === "show") {
+      var showId = this.show.id;
+      var seasonId = this.show.seasons[0].id;
+      this.$state.go("show.season", {showId: showId, seasonId: seasonId}, {location: "replace"});
     }
+  }
+};
 
-    function findShow () {
-      var showId = $stateParams.showId;
-      co(function *() {
-        $scope.show = yield socketClient.call("findShow", showId);
-        $scope.$apply();
+App.ctrl(ShowController);
 
-        redirectToLastSeason();
-      })();
-    }
 
-    function redirectToLastSeason () {
-      if ($state.$current.name === "show") {
-        var showId = $scope.show.id;
-        var seasonId = $scope.show.seasons[0].id;
-        $state.go("show.season", {showId: showId, seasonId: seasonId}, {location: "replace"});
-      }
-    }
-
-    init();
-  });

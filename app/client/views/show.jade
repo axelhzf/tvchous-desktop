@@ -1,13 +1,15 @@
-spinner(wait-for="show")
-.show(ng-if="show")
+//spinner(wait-for="show")
+
+
+.show(ng-if="sh.show")
     header
       .poster
-        img(ng-src="{{show.poster}}")
+        img(ng-src="{{sh.show.poster}}")
       .description
-        h1 {{show.title}}
+        h1 {{sh.show.title}}
         div Seasons
         ul.seasons.inline
-          li(ng-repeat="season in show.seasons")
+          li(ng-repeat="season in sh.show.seasons")
             a(ui-sref="show.season({showId: show.id, seasonId: season.id})", ui-sref-active="active")
               | {{season.season}}
             span(ng-if="!$last")  /

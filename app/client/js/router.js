@@ -25,13 +25,13 @@ App.config(function ($stateProvider, $urlRouterProvider) {
     url: "/shows/:showId",
     parent: "serverConnect",
     templateUrl: "dist/views/show.html",
-    controller: "ShowController"
+    controller: "ShowController as sh"
   });
 
   $stateProvider.state("show.season", {
     url: "/seasons/:seasonId",
     templateUrl: "dist/views/show_season.html",
-    controller: "SeasonController"
+    controller: "SeasonController as se"
   });
 
   $stateProvider.state("show.episode", {
