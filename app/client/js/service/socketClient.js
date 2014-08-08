@@ -1,9 +1,13 @@
 var _ = require("underscore");
 var co = require("co");
 
-exports.call = call;
+module.exports = {
+  call: call,
+  watch: watch
+};
 
 var waitingResponses = {};
+var watchCallbacks = {};
 
 var socket = require("socket.io-client")("http://localhost:5001");
 socket.on("connect", onConnect);
@@ -36,5 +40,18 @@ function onResponse (data) {
   }
 }
 
-
+function watch ($scope, remoteKey, varName) {
+  socket.emit("watch", {key: remoteKey});
+  var eventName = "watchUpdate:" + remoteKey;
+  socket.on(eventName, function (data) {
+    $scope.$apply(function () {
+      $scope[varName] = data;
+    });
+  });
+  $scope.$on("$destroy", function () {
+    delete watchCallbacks[remoteKey];
+    socket.off(eventName);
+    socket.emit("stopWatch", {key: remoteKey});
+  });
+}
 

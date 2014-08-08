@@ -1,4 +1,4 @@
-angular.module("app").controller("HeaderController", function ($scope, $state, $rootScope) {
+App.controller("HeaderController", function ($scope, $state, $rootScope) {
 
   function init () {
     $rootScope.$on('$stateChangeSuccess',

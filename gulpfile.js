@@ -1,5 +1,5 @@
 var gulp = require("gulp");
-var sass = require("gulp-sass");
+var less = require("gulp-less");
 var jade = require("gulp-jade");
 var gutil = require("gulp-util");
 var autoprefixer = require("gulp-autoprefixer");
@@ -10,7 +10,7 @@ var rename = require("gulp-rename");
 
 var path = {
   client: {
-    sass: "app/client/scss/**/*.scss",
+    less: "app/client/less",
     views: "app/client/views/**/*.jade"
   },
   dist: {
@@ -19,9 +19,12 @@ var path = {
   }
 };
 
-gulp.task("sass", function () {
-  gulp.src(path.client.sass)
-    .pipe(sass())
+gulp.task("less", function () {
+  gulp.src(path.client.less + "/main.less")
+    .pipe(less({
+      paths: ["app/dist/components"]
+    }))
+    .on("error", gutil.log)
     .pipe(autoprefixer({cascade: true}))
     .on("error", gutil.log)
     .pipe(gulp.dest(path.dist.css))
@@ -34,8 +37,8 @@ gulp.task("views", function () {
     .pipe(gulp.dest(path.dist.views));
 });
 
-gulp.task("watch", ["sass", "views"], function () {
-  gulp.watch(path.client.sass, ["sass"]);
+gulp.task("watch", ["less", "views"], function () {
+  gulp.watch(path.client.less + "/*.less", ["less"]);
   gulp.watch(path.client.views, ["views"]);
 });
 
@@ -77,6 +80,5 @@ gulp.task("nw", function (callback) {
     callback();
     gutil.beep();
   });
-
 
 });

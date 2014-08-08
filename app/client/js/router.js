@@ -1,6 +1,4 @@
-module = angular.module("app");
-
-module.config(function ($stateProvider, $urlRouterProvider) {
+App.config(function ($stateProvider, $urlRouterProvider) {
   $urlRouterProvider.otherwise("/");
 
   $stateProvider.state("serverConnect", {

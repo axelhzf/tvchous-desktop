@@ -1,17 +1,16 @@
 .header(ng-controller="HeaderController")
   .header-left
-    a(ui-sref="home")
-      i(class="fa fa-home")
-    a(ng-click="previous()")
-      i(class="fa fa-chevron-left")
-    a(ng-click="next()")
-      i(class="fa fa-chevron-right")
-
-  .header-center
+    .brand TvChous
     form(ng-submit="changeQuery(query)")
       input(type="text", ng-model="query", placeholder="Search...")
 
   .header-right
-    a(ui-sref="config")
-      i(class="fa fa-cog")
+    a.icon(ui-sref="home")
+      i(class="ion-ios7-home-outline")
+    a.icon(ng-click="previous()")
+      i(class="ion-ios7-arrow-left")
+    a.icon(ng-click="next()")
+      i(class="ion-ios7-arrow-right")
+    a.icon(ui-sref="config")
+      i(class="ion-ios7-settings-strong")
 

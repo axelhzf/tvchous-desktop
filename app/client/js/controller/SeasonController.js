@@ -3,7 +3,6 @@ var mediaPlayer = require("./client/js/lib/mediaPlayer");
 var streaming = require("./client/js/lib/streaming");
 var socketClient = require("./client/js/service/socketClient");
 
-
 angular.module("app").controller("SeasonController",
   function ($scope, $stateParams) {
 
@@ -14,10 +13,9 @@ angular.module("app").controller("SeasonController",
     function findEpisodes () {
       var showId = $stateParams.showId;
       var seasonId = $stateParams.seasonId;
-      co(function *() {
-        $scope.season = yield socketClient.call("findSeason", showId, seasonId);
-        $scope.$apply();
-      })();
+
+      var remoteKey = showId + "." + seasonId;
+      socketClient.watch($scope, remoteKey, "season");
     }
 
     function playEpisode (episode) {

@@ -1,7 +1,7 @@
 var remote = require("./client/js/service/remote");
 var configuration = require("./client/js/service/configuration");
 
-angular.module("app").controller("ServerConnect", function ($scope, $state) {
+App.controller("ServerConnect", function ($scope, $state) {
 
   function init() {
     if(configuration.get("firstTime")) {
