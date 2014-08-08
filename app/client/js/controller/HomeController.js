@@ -13,7 +13,11 @@ function HomeController ($scope) {
 HomeController.prototype = {
 
   findShows: function* () {
-    this.allShows = yield client.call("findShows");
+    var shows = yield client.call("findShows");
+    var sortedShows = _.sortBy(shows, function (show) {
+      return show.favorite ? 0 : 1;
+    });
+    this.allShows = sortedShows;
   }
 
 };
