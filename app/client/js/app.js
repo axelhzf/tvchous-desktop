@@ -28,4 +28,37 @@
 //  console.log('Caught exception: ' + err);
 //});
 
-window.App = angular.module("app", ["ui.router"]);
+var co = require("co");
+
+var App = window.App = angular.module("app", ["ui.router", "ngAnimate"]);
+
+App.config(function($sceProvider) {
+  $sceProvider.enabled(false);
+});
+
+App.ctrl = function (clazz) {
+  window.App.controller(clazz.name, clazz);
+
+  for (var method in clazz.prototype) {
+    if (isGeneratorFunction(clazz.prototype[method])) {
+      var gen = clazz.prototype[method];
+      clazz.prototype[method] = function () {
+        var self = this;
+        var args = arguments;
+        return function (cb) {
+          co(function* () {
+            var res = yield gen.apply(self, args);
+            if (self.$scope) {
+              self.$scope.$apply();
+            }
+            return res;
+          })(cb);
+        }
+      }
+    }
+  }
+};
+
+function isGeneratorFunction (obj) {
+  return obj && obj.constructor && 'GeneratorFunction' == obj.constructor.name;
+}

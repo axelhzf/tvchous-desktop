@@ -1,76 +1,77 @@
 html {
-  color: @lightGrey;
+    color: @lightGrey;
 }
 
 body {
-  margin: 0;
-  background-color: @black;
+    margin: 0;
+    background-color: @black;
 }
 
 a {
-  cursor: pointer;
-  //color: @lightGrey;
-  text-decoration: none;
-  &:hover {
+    cursor: pointer;
+    //color: @lightGrey;
     text-decoration: none;
-  }
+    &:hover {
+        text-decoration: none;
+    }
 }
 
 h1, h2, h3, h4, h5 {
-  font-weight: 100;
-  color: #fff;
+    font-weight: 100;
+    color: #fff;
+    margin: 0;
+    margin-bottom: 10px;
 }
 
 .main-content {
-  padding-top: @header-height + 15px;
-  padding-left: 15px;
-  padding-right: 15px;
+    padding-top: @header-height + 15px;
+    padding-left: 15px;
+    padding-right: 15px;
 }
 
 ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
+    list-style: none;
+    margin: 0;
+    padding: 0;
 }
 
 li {
-  padding: 5px 2px;
+    padding: 5px 2px;
 }
 
 ul.inline {
-  li {
-    display: inline-block;
-  }
+    li {
+        display: inline-block;
+    }
 }
 
-
 .show header {
-  display: flex;
-  flex-direction: row;
+    display: flex;
+    flex-direction: row;
 
-  .poster img {
-    width: 100px;
-    height: auto;
-  }
-
-  .description {
-    flex: 1;
-    margin-left: 20px;
-
-    h1 {
-      color: #fff;
-
+    .poster img {
+        width: 100px;
+        height: auto;
     }
-  }
 
-  .seasons {
-    font-size: 24px;
-    font-weight: lighter;
+    .description {
+        flex: 1;
+        margin-left: 20px;
 
-    .active {
-      color: @green;
+        h1 {
+            color: #fff;
+
+        }
     }
-  }
+
+    .seasons {
+        font-size: 24px;
+        font-weight: lighter;
+
+        .active {
+            color: @green;
+        }
+    }
 }
 
 .show-content {
@@ -78,74 +79,72 @@ ul.inline {
 }
 
 .aired {
-  color: @green;
+    color: @green;
 }
 
 table {
-  width: 100%;
-  border-collapse: collapse;
+    width: 100%;
+    border-collapse: collapse;
 
-  td, th {
-    padding: 7px;
-  }
+    td, th {
+        padding: 7px;
+    }
 
-  td {
-    border-top: 1px solid @border-color;
-    border-bottom: 1px solid @border-color;
-  }
+    td {
+        border-top: 1px solid @border-color;
+        border-bottom: 1px solid @border-color;
+    }
 }
 
 .episodes-table {
-  .is-aired {
-    width: 20px;
-  }
-
-  .aired-date {
-    width: 130px;
-  }
-
-  .utorrent {
-    width: 100px;
-  }
-
-  .actions {
-    width: 100px;
-    text-align: right;
-
-    span {
-      margin-left: 10px;
+    .is-aired {
+        width: 20px;
     }
-  }
+
+    .aired-date {
+        width: 130px;
+    }
+
+    .utorrent {
+        width: 100px;
+    }
+
+    .actions {
+        width: 100px;
+        text-align: right;
+
+        span {
+            margin-left: 10px;
+        }
+    }
 }
 
 .torrents-table {
-  .status {
-    width: 120px;
-  }
+    .status {
+        width: 120px;
+    }
 }
-
-
 
 .favorites {
 
 }
 
 .subtitles-status {
-  font-variant: small-caps;
+    font-variant: small-caps;
 }
 
 .subtitles-status-none {
-  color: @lightGrey;
+    color: @lightGrey;
 }
 
 .subtitles-status-some {
-  color: orange;
+    color: orange;
 }
 
 .subtitles-status-all {
-  color: @green;
+    color: @green;
 }
 
 .hd {
-  height: 15px;
+    height: 15px;
 }

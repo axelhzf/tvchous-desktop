@@ -1,21 +1,23 @@
 .favorites.content
 
-  spinner(wait-for="allShows || favorites")
+  //div(ng-if="!query && favorites")
+  //  h1 FAVORITES
+  //  .poster-list
+  //    a.poster-list-item(ng-repeat="show in favorites", ui-sref="show({showId: show.id })")
+  //      img(ng-src="{{show.poster}}")
 
-  div(ng-if="!query && favorites")
-    h1 FAVORITES
-    .poster-list
-      a.poster-list-item(ng-repeat="show in favorites", ui-sref="show({showId: show.id })")
-        img(ng-src="{{show.poster}}")
-
-  div(ng-if="!query && allShows && !favorites.length")
+  div(ng-if="h.allShows")
     h1 SHOWS
     .poster-list
-      a.poster-list-item(ng-repeat="show in allShows | limitTo: 10", ui-sref="show({showId: show.id })")
-        img(ng-src="{{show.poster}}")
+      a.poster-list-item(ng-repeat="show in h.allShows | filter: {title: h.global.query}| limitTo: 30", ui-sref="show({showId: show.id })")
+        fade-img(src="show.poster")
+        .backdrop
+          i.ion-ios7-eye
 
-  div(ng-if="query && allShows")
-    h1 SEARCH RESULT
-    .poster-list(ng-if="allShows")
-      a.poster-list-item(ng-repeat="show in allShows | filter: {title: query} | limitTo: 10", ui-sref="show({showId: show.id })")
-        img(ng-src="{{show.poster}}")
+
+
+  //div(ng-if="query && allShows")
+  //  h1 SEARCH RESULT
+  //  .poster-list(ng-if="allShows")
+  //    a.poster-list-item(ng-repeat="show in allShows | filter: {title: query} | limitTo: 10", ui-sref="show({showId: show.id })")
+  //      img(ng-src="{{show.poster}}")

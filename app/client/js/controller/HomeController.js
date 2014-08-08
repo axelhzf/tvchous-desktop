@@ -1,26 +1,21 @@
 //var remote = require("./client/js/service/remote");
 //var socketClient = require("./client/js/service/socketClient");
 
-App.controller("HomeController", function ($scope, $stateParams) {
+var client = require("./client/js/lib/client");
+var g = require("./client/js/controller/Global");
 
-  function init () {
-    $scope.query = $stateParams.query;
-    console.log("init!");
-    findShows();
+function HomeController ($scope) {
+  this.$scope = $scope;
+  this.global = g;
+  this.findShows()();
+}
+
+HomeController.prototype = {
+
+  findShows: function* () {
+    this.allShows = yield client.call("findShows");
   }
 
-  function findShows () {
-    co(function *() {
-      try {
-        $scope.allShows = yield socketClient.call("findShows");
-        $scope.favorites = _.where($scope.allShows, {favorite: true});
-        $scope.$apply();
-      } catch(e) {
-        console.log(e);
-      }
+};
 
-    })();
-  }
-
-  init();
-});
+App.ctrl(HomeController);

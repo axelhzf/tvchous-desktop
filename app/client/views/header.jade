@@ -1,15 +1,17 @@
-.header(ng-controller="HeaderController")
+.header(ng-controller="HeaderController as h")
   .header-left
     .brand TvChous
-    form(ng-submit="changeQuery(query)")
-      input(type="text", ng-model="query", placeholder="Search...")
+    form
+      input(type="text", ng-model="h.global.query", placeholder="Search...")
+      a.input-clear(ng-click="h.clearQuery()", ng-class="{visible: h.global.query.length > 0}")
+        i.ion-ios7-close-outline
 
   .header-right
     a.icon(ui-sref="home")
       i(class="ion-ios7-home-outline")
-    a.icon(ng-click="previous()")
+    a.icon(ng-click="h.previous()")
       i(class="ion-ios7-arrow-left")
-    a.icon(ng-click="next()")
+    a.icon(ng-click="h.next()")
       i(class="ion-ios7-arrow-right")
     a.icon(ui-sref="config")
       i(class="ion-ios7-settings-strong")

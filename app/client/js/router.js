@@ -4,21 +4,21 @@ App.config(function ($stateProvider, $urlRouterProvider) {
   $stateProvider.state("serverConnect", {
     abstract: true,
     templateUrl: "dist/views/server_connect.html",
-    controller: "ServerConnect"
+    controller: "ServerConnect as s"
   });
 
   $stateProvider.state("home", {
     url: "/",
     parent: "serverConnect",
     templateUrl: "dist/views/home.html",
-    controller: "HomeController"
+    controller: "HomeController as h"
   });
 
   $stateProvider.state("search", {
     url: "/search/:query",
     parent: "serverConnect",
     templateUrl: "dist/views/home.html",
-    controller: "HomeController"
+    controller: "HomeController as h"
   });
 
   $stateProvider.state("show", {

@@ -1,32 +1,22 @@
-App.controller("HeaderController", function ($scope, $state, $rootScope) {
+var g = require("./client/js/controller/global");
 
-  function init () {
-    $rootScope.$on('$stateChangeSuccess',
-      function (event, toState, toParams) {
-        if (toState.name === "search") {
-          $scope.query = toParams.query;
-        }
-      }
-    )
-  }
+function HeaderController ($state, $rootScope) {
+  this.$state = $state;
+  this.$rootScope = $rootScope;
+  this.query = "";
+  this.global = g;
+}
 
-  function changeQuery (query) {
-    var location = $state.current.name === "search" ? "replace" : true;
-    $state.go("search", {query: query}, {location: location});
-  }
-
-  function next () {
-    history.forward();
-  }
-
-  function previous () {
+HeaderController.prototype = {
+  clearQuery: function () {
+    this.global.query = "";
+  },
+  next: function () {
+    history.next();
+  },
+  previous: function () {
     history.back();
   }
+};
 
-  _.extend($scope, {
-    changeQuery: changeQuery,
-    next: next,
-    previous: previous
-  });
-  init();
-});
+App.ctrl(HeaderController);

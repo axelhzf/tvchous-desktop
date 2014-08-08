@@ -43,6 +43,7 @@
     "underscore": "~1.6.0",
     "underscore.string": "^2.3.3",
     "utorrent-api": "^0.1.3",
-    "windows-no-runnable": "0.0.6"
+    "windows-no-runnable": "0.0.6",
+    "tvchous-client": "git://github.com/axelhzf/tvchous-client.git#master"
   }
 }
